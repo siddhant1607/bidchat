@@ -43,6 +43,8 @@ import { NewGroupModal } from "@/components/chat/NewGroupModal";
 import GroupDetailsDrawer from "@/components/chat/GroupDetailsDrawer";
 import { NewDirectMessageModal } from "@/components/chat/NewDirectMessageModal";
 import { StartAuctionModal } from "@/components/chat/StartAuctionModal";
+import ChatFeed from "@/components/chat/ChatFeed";
+import ChatInput from "@/components/chat/ChatInput";
 import TeamClaimModal from "@/components/auction/TeamClaimModal";
 import AuctionAnalyticsDashboard, { TeamStats } from "@/components/auction/AuctionAnalyticsDashboard";
 import AuctionConsoleModal from "@/components/auction/AuctionConsoleModal";
@@ -1940,159 +1942,45 @@ export default function UnifiedAppShell() {
                 {/* Right Side: Chat Feed + Input Bar */}
                 <div className="flex-1 flex flex-col min-w-0 h-full overflow-hidden bg-[#F8FAFC] dark:bg-[#0B0E17]">
 
-              {/* Chat Feed */}
-              <div className="flex-1 overflow-y-auto p-4 sm:p-6 custom-scrollbar">
-                <div className="w-full space-y-4">
-                  
-                  <div className="flex flex-col items-center my-4">
-                    <span className="px-3.5 py-1 bg-slate-200/60 dark:bg-[#1E263E]/60 rounded-full text-[10px] font-bold text-slate-500">
-                      Today
-                    </span>
-                  </div>
+              <ChatFeed
+                messages={currentChatMessages.map(msg => ({
+                  ...msg,
+                  isWhisper: !!msg.isWhisper,
+                  teamShortName: msg.whisperTeamId,
+                })) as any[]}
+                currentUserTeam={teams.find(t => t.ownerId === "me" || (user && t.ownerId === user.username)) as any}
+                currentUserId={user?.username}
+              />
 
-                  {currentChatMessages.map((msg) => {
-                    const isMine = msg.senderId === user.username || msg.senderId === "me";
-                    return (
-                      <div 
-                        key={msg.id} 
-                        className={`flex gap-3 ${isMine ? 'flex-row-reverse' : 'flex-row'}`}
-                      >
-                        {!isMine && (
-                          <button
-                            onClick={() => handleOpenProfileByName(msg.senderName, msg.senderId)}
-                            className="w-8 h-8 rounded-full bg-blue-500/20 hover:ring-2 hover:ring-blue-400 text-blue-600 dark:text-blue-400 flex items-center justify-center text-xs font-black mt-1 shrink-0 transition-all cursor-pointer"
-                            title={`View ${msg.senderName}'s Profile`}
-                          >
-                            {msg.senderName.charAt(0)}
-                          </button>
-                        )}
-                        <div className={`p-3.5 rounded-[22px] shadow-sm max-w-[80%] sm:max-w-[70%] ${
-                          isMine 
-                            ? 'bg-blue-600 text-white rounded-tr-none shadow-sm' 
-                            : msg.isWhisper
-                            ? 'bg-teal-50 dark:bg-teal-950/40 border border-teal-300/50 dark:border-teal-700/50 rounded-tl-none text-teal-950 dark:text-teal-50'
-                            : 'bg-white dark:bg-[#181F30] rounded-tl-none border border-slate-100 dark:border-slate-800'
-                        }`}>
-                          {!isMine && (
-                            <div className="text-[11px] font-bold text-blue-600 dark:text-teal-400 mb-1 flex items-center gap-1">
-                              <button
-                                onClick={() => handleOpenProfileByName(msg.senderName, msg.senderId)}
-                                className="hover:underline font-bold text-left cursor-pointer"
-                                title={`View ${msg.senderName}'s Profile`}
-                              >
-                                {msg.senderName}
-                              </button>
-                              {msg.isWhisper && (
-                                <span className="text-[9px] px-1.5 py-0.5 rounded bg-teal-500/20 text-teal-700 dark:text-teal-300 font-bold">
-                                  🔒 {msg.whisperTeamId} Dugout
-                                </span>
-                              )}
-                            </div>
-                          )}
-                          <p className="text-sm leading-relaxed whitespace-pre-wrap">{msg.text}</p>
+              <ChatInput
+                userTeam={teams.find(t => t.ownerId === "me" || (user && t.ownerId === user.username)) as any}
+                onSendMessage={(text, isWhisper) => {
+                  const myTeam = teams.find(t => t.ownerId === "me" || (user && t.ownerId === user.username));
+                  const newMsg = {
+                    id: `msg_${Date.now()}`,
+                    chatId: activeChatId,
+                    senderId: user?.username || "me",
+                    senderName: user?.name || user?.username || "You",
+                    text: text.trim(),
+                    timestamp: new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }),
+                    isWhisper: isWhisper,
+                    whisperTeamId: isWhisper ? (myTeam?.shortName || "CSK") : undefined,
+                  };
 
-                          {/* Rich Shared Preset/Roster Card */}
-                          {msg.shareCard && (
-                            <div className="mt-2.5 p-3.5 rounded-2xl bg-white/95 dark:bg-[#121624] border border-teal-400/40 flex items-center justify-between gap-3 text-slate-900 dark:text-white shadow-sm">
-                              <div className="min-w-0">
-                                <div className="flex items-center gap-1.5 mb-0.5">
-                                  <span className="text-[10px] font-bold text-teal-600 uppercase tracking-wider">
-                                    {msg.shareCard.type === "preset" ? "★ Auction Preset" : "★ Tournament Roster"}
-                                  </span>
-                                  {msg.shareCard.code && (
-                                    <span className="px-1.5 py-0.5 rounded font-mono text-[9px] font-black bg-blue-50 dark:bg-blue-950/60 text-blue-600 dark:text-blue-400 border border-blue-200/50 dark:border-blue-800/40">
-                                      {msg.shareCard.code}
-                                    </span>
-                                  )}
-                                </div>
-                                <div className="font-bold text-xs truncate">{msg.shareCard.name}</div>
-                                <div className="text-[10px] text-slate-400 truncate">{msg.shareCard.details}</div>
-                              </div>
-                              <button
-                                onClick={() => handleImportFromChat(msg.shareCard!)}
-                                className="px-3.5 py-2 rounded-full bg-blue-600 hover:bg-blue-700 text-white text-[11px] font-bold shrink-0 transition-all shadow-sm flex items-center gap-1.5 active:scale-95"
-                              >
-                                <Download className="w-3.5 h-3.5" />
-                                <span>Import</span>
-                              </button>
-                            </div>
-                          )}
+                  setMessages(prev => ({
+                    ...prev,
+                    [activeChatId]: [...(prev[activeChatId] || []), newMsg]
+                  }));
 
-                          <div className={`text-[10px] text-right mt-1.5 ${isMine ? 'text-blue-100/70' : 'text-slate-400'}`}>
-                            {msg.timestamp} {isMine && '✓✓'}
-                          </div>
-                        </div>
-                      </div>
-                    );
-                  })}
+                  setChats(prev => prev.map(c => 
+                    c.id === activeChatId ? { ...c, lastMessage: newMsg.text } : c
+                  ));
 
-                  <div ref={messagesEndRef} />
-                </div>
-              </div>
-
-              {/* Chat Input Bar */}
-              <div className="p-3 sm:p-4 bg-white dark:bg-[#121624] border-t border-slate-200/80 dark:border-[#1E263E] shrink-0">
-                {isWhisperActive && (
-                  <div className="mb-2 px-3 py-1 rounded-full bg-teal-500/10 text-teal-800 dark:text-teal-300 text-xs font-bold flex items-center justify-between border border-teal-500/20">
-                    <div className="flex items-center gap-1.5">
-                      <ShieldAlert className="w-3.5 h-3.5 text-teal-500" />
-                      <span>Whispering to CSK Team Dugout (Isolated channel)</span>
-                    </div>
-                    <button onClick={() => setIsWhisperActive(false)} className="hover:underline text-[11px]">
-                      Switch to Public
-                    </button>
-                  </div>
-                )}
-
-                <div className="w-full flex items-end gap-2.5 relative">
-                  <button 
-                    onClick={() => {
-                      if (currentChat.isAuctionActive) {
-                        setIsWhisperActive(!isWhisperActive);
-                      }
-                    }}
-                    className={`w-11 h-11 rounded-full flex items-center justify-center transition-all shrink-0 ${
-                      isWhisperActive 
-                        ? 'bg-teal-600 text-white shadow-sm' 
-                        : currentChat.isAuctionActive
-                        ? 'bg-teal-500/10 text-teal-600 dark:text-teal-400 hover:bg-teal-500/20'
-                        : 'bg-slate-100 text-slate-500 dark:bg-[#1E263E] dark:text-slate-400 hover:bg-slate-200'
-                    }`}
-                    title={currentChat.isAuctionActive ? (isWhisperActive ? "Whisper Active" : "Whisper to Dugout") : "Attach Media"}
-                  >
-                    {currentChat.isAuctionActive ? <MessageCircle className="w-5 h-5" /> : <Plus className="w-5 h-5" />}
-                  </button>
-
-                  <div className={`flex-1 rounded-[24px] flex items-end border transition-colors ${
-                    isWhisperActive 
-                      ? 'bg-teal-50/50 dark:bg-teal-950/20 border-teal-500/50' 
-                      : 'bg-slate-100 dark:bg-[#1E263E] border-transparent focus-within:border-blue-500/50'
-                  }`}>
-                    <textarea 
-                      value={inputText}
-                      onChange={(e) => setInputText(e.target.value)}
-                      onKeyDown={handleKeyDown}
-                      placeholder={
-                        isWhisperActive 
-                          ? "Whisper strategy to your franchise..." 
-                          : currentChat.isAuctionActive 
-                          ? "Chat or discuss current bid..." 
-                          : "Type a message..."
-                      }
-                      className="w-full bg-transparent border-none focus:ring-0 px-4 py-3 max-h-32 min-h-[48px] resize-none text-sm outline-none custom-scrollbar dark:text-white placeholder:text-slate-500"
-                      rows={1}
-                    />
-                  </div>
-
-                  <button 
-                    onClick={handleSendMessage}
-                    disabled={!inputText.trim()}
-                    className="w-11 h-11 rounded-full bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white flex items-center justify-center transition-all shadow-md shadow-blue-500/25 shrink-0"
-                  >
-                    <ArrowRight className="w-5 h-5" />
-                  </button>
-                </div>
-              </div>
+                  if (socket && isConnected) {
+                    socket.emit("send_message", newMsg);
+                  }
+                }}
+              />
 
                 </div>
               </div>

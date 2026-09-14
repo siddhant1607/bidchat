@@ -1,15 +1,17 @@
 "use client";
 
 import React, { useState } from "react";
-import { Lock, Send } from "lucide-react";
+import { Lock, Send, X, Reply } from "lucide-react";
 import { Team } from "@/types/auction";
 
 interface ChatInputProps {
   userTeam: Team | null;
   onSendMessage: (text: string, isWhisper: boolean) => void;
+  replyTo?: { senderName: string; text: string } | null;
+  onCancelReply?: () => void;
 }
 
-export default function ChatInput({ userTeam, onSendMessage }: ChatInputProps) {
+export default function ChatInput({ userTeam, onSendMessage, replyTo, onCancelReply }: ChatInputProps) {
   const [text, setText] = useState("");
   const [isWhisperMode, setIsWhisperMode] = useState(false);
   const [showSlashHints, setShowSlashHints] = useState(false);
@@ -17,137 +19,109 @@ export default function ChatInput({ userTeam, onSendMessage }: ChatInputProps) {
   const handleTextChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     const val = e.target.value;
     setText(val);
-
-    if (val.startsWith("/")) {
-      setShowSlashHints(true);
-    } else {
-      setShowSlashHints(false);
-    }
+    setShowSlashHints(val.startsWith("/"));
   };
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     if (!text.trim()) return;
-
-    // Check if user typed /whisper or /w
     if (text.startsWith("/whisper ") || text.startsWith("/w ")) {
       const cleanText = text.replace(/^\/(whisper|w)\s+/, "");
-      if (cleanText.trim()) {
-        onSendMessage(cleanText.trim(), true);
-        setText("");
-        setShowSlashHints(false);
-        return;
-      }
+      if (cleanText.trim()) { onSendMessage(cleanText.trim(), true); setText(""); setShowSlashHints(false); return; }
     }
-
     onSendMessage(text.trim(), isWhisperMode);
     setText("");
     setShowSlashHints(false);
+    onCancelReply?.();
   };
 
   return (
-    <div className="p-3 bg-white dark:bg-slate-900 border-t border-slate-200 dark:border-slate-800 relative transition-colors">
-      {/* ------------------------------------------------------------- */}
-      {/* SLASH COMMANDS HOVER POPUP                                     */}
-      {/* ------------------------------------------------------------- */}
+    <div
+      className="transition-colors"
+      style={{
+        background: "rgba(10,10,10,0.95)",
+        backdropFilter: "blur(20px)",
+        borderTop: "1px solid rgba(255,255,255,0.06)",
+        padding: replyTo ? "0" : "10px 12px 12px",
+      }}
+    >
+      {/* Slash Commands Popup */}
       {showSlashHints && (
-        <div className="absolute bottom-16 left-4 bg-slate-900 text-white rounded-2xl p-2.5 shadow-2xl border border-slate-800 text-xs w-64 space-y-1.5 animate-in slide-in-from-bottom-2">
-          <div className="text-[10px] font-bold text-slate-400 uppercase tracking-wider px-2">
-            Available Slash Commands
-          </div>
-          <button
-            type="button"
-            onClick={() => {
-              setText("/whisper ");
-              setIsWhisperMode(true);
-              setShowSlashHints(false);
-            }}
-            className="w-full text-left px-2 py-1.5 hover:bg-slate-800 rounded-lg flex items-center space-x-2"
-          >
-            <Lock className="w-3.5 h-3.5 text-teal-400" />
-            <span>
-              <strong>/whisper</strong> — Secret team message
-            </span>
+        <div style={{ position: "absolute", bottom: 80, left: 12, background: "rgba(15,15,15,0.98)", backdropFilter: "blur(20px)", border: "1px solid rgba(255,255,255,0.08)", borderRadius: 14, padding: 8, minWidth: 260, boxShadow: "0 20px 40px rgba(0,0,0,0.6)", zIndex: 100 }}>
+          <div style={{ fontSize: 10, fontWeight: 800, color: "rgba(255,255,255,0.3)", textTransform: "uppercase", letterSpacing: "0.1em", padding: "4px 8px 8px" }}>Available Commands</div>
+          <button type="button" onClick={() => { setText("/whisper "); setIsWhisperMode(true); setShowSlashHints(false); }} style={{ width: "100%", display: "flex", alignItems: "center", gap: 10, padding: "9px 10px", borderRadius: 9, background: "transparent", border: "none", color: "rgba(255,255,255,0.85)", fontSize: 13, cursor: "pointer" }} onMouseEnter={e => (e.currentTarget.style.background = "rgba(255,255,255,0.06)")} onMouseLeave={e => (e.currentTarget.style.background = "transparent")}>
+            <Lock style={{ width: 14, height: 14, color: "#34D399" }} />
+            <span><strong style={{ color: "#FFFFFF" }}>/whisper</strong> — Send a secret dugout message</span>
           </button>
-          <button
-            type="button"
-            onClick={() => {
-              setText("/purse");
-              setShowSlashHints(false);
-            }}
-            className="w-full text-left px-2 py-1.5 hover:bg-slate-800 rounded-lg"
-          >
-            <strong>/purse</strong> — View remaining budgets
+          <button type="button" onClick={() => { setText("/purse"); setShowSlashHints(false); }} style={{ width: "100%", display: "flex", alignItems: "center", gap: 10, padding: "9px 10px", borderRadius: 9, background: "transparent", border: "none", color: "rgba(255,255,255,0.85)", fontSize: 13, cursor: "pointer" }} onMouseEnter={e => (e.currentTarget.style.background = "rgba(255,255,255,0.06)")} onMouseLeave={e => (e.currentTarget.style.background = "transparent")}>
+            <span style={{ width: 14, textAlign: "center" }}>💰</span>
+            <span><strong style={{ color: "#FFFFFF" }}>/purse</strong> — View remaining budgets</span>
           </button>
         </div>
       )}
 
-      {/* Whisper Mode Active Alert Pill */}
+      {/* Reply Preview Bar */}
+      {replyTo && (
+        <div style={{ display: "flex", alignItems: "center", gap: 10, padding: "10px 14px", borderBottom: "1px solid rgba(255,255,255,0.06)", background: "rgba(37,99,235,0.08)" }}>
+          <div style={{ width: 3, height: 36, background: "#2563EB", borderRadius: 2, flexShrink: 0 }} />
+          <div style={{ flex: 1, minWidth: 0 }}>
+            <p style={{ fontSize: 11, fontWeight: 800, color: "#60A5FA", marginBottom: 1 }}>{replyTo.senderName}</p>
+            <p style={{ fontSize: 12, color: "rgba(255,255,255,0.5)", overflow: "hidden", textOverflow: "ellipsis", whiteSpace: "nowrap" }}>{replyTo.text}</p>
+          </div>
+          <button onClick={onCancelReply} style={{ background: "transparent", border: "none", cursor: "pointer", padding: 4, color: "rgba(255,255,255,0.4)" }}>
+            <X style={{ width: 16, height: 16 }} />
+          </button>
+        </div>
+      )}
+
+      {/* Whisper Mode Alert */}
       {isWhisperMode && userTeam && (
-        <div className="mb-2 flex items-center justify-between px-3 py-1 bg-teal-50 dark:bg-teal-950/60 border border-teal-300/60 dark:border-teal-700/60 rounded-xl text-xs text-teal-900 dark:text-teal-300 font-bold animate-in fade-in">
-          <div className="flex items-center space-x-1.5">
-            <Lock className="w-3.5 h-3.5 text-amber-700 dark:text-teal-400" />
-            <span>Whisper Mode Active: Only {userTeam.shortName} teammates will see this</span>
+        <div style={{ display: "flex", alignItems: "center", justifyContent: "space-between", padding: "8px 14px", background: "rgba(16,185,129,0.08)", borderBottom: "1px solid rgba(16,185,129,0.15)" }}>
+          <div style={{ display: "flex", alignItems: "center", gap: 8 }}>
+            <Lock style={{ width: 13, height: 13, color: "#34D399" }} />
+            <span style={{ fontSize: 12, fontWeight: 700, color: "#34D399" }}>Dugout Mode: Only {userTeam.shortName} sees this</span>
           </div>
-          <button
-            onClick={() => setIsWhisperMode(false)}
-            className="text-[10px] text-amber-700 dark:text-teal-400 hover:underline"
-          >
-            Cancel
-          </button>
+          <button onClick={() => setIsWhisperMode(false)} style={{ background: "transparent", border: "none", cursor: "pointer", fontSize: 11, color: "rgba(52,211,153,0.7)", fontWeight: 700 }}>Cancel</button>
         </div>
       )}
 
-      <form onSubmit={handleSubmit} className="flex items-center space-x-2">
-        {/* WHISPER BUTTON: Replaces the attachment button */}
+      {/* Input Row */}
+      <form onSubmit={handleSubmit} style={{ display: "flex", alignItems: "center", gap: 8, padding: "10px 12px 12px" }}>
         <button
           type="button"
           disabled={!userTeam}
           onClick={() => setIsWhisperMode(!isWhisperMode)}
-          title={
-            userTeam
-              ? isWhisperMode
-                ? "Switch back to Public Chat"
-                : `Whisper to ${userTeam.shortName} Team Dugout`
-              : "Join a team to whisper"
-          }
-          className={`p-2.5 rounded-xl transition-all ${
-            isWhisperMode
-              ? "bg-teal-500 text-white shadow-md"
-              : "bg-slate-100 dark:bg-slate-800 hover:bg-slate-200 dark:hover:bg-slate-700 text-slate-600 dark:text-slate-300 disabled:opacity-40"
-          }`}
+          title={userTeam ? (isWhisperMode ? "Back to public" : `Whisper to ${userTeam.shortName}`) : "Join a team"}
+          style={{ width: 40, height: 40, borderRadius: 12, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, background: isWhisperMode ? "rgba(16,185,129,0.2)" : "rgba(255,255,255,0.06)", border: isWhisperMode ? "1px solid rgba(16,185,129,0.4)" : "1px solid rgba(255,255,255,0.08)", color: isWhisperMode ? "#34D399" : "rgba(255,255,255,0.4)", cursor: userTeam ? "pointer" : "not-allowed", opacity: userTeam ? 1 : 0.4, transition: "all 0.2s" }}
         >
-          <Lock className="w-4 h-4" />
+          <Lock style={{ width: 16, height: 16 }} />
         </button>
 
-        {/* Message Input */}
         <input
           type="text"
           value={text}
           onChange={handleTextChange}
-          placeholder={
-            isWhisperMode && userTeam
-              ? `Secret message to ${userTeam.shortName}...`
-              : "Message or type / for commands..."
-          }
-          className={`flex-1 text-sm border rounded-xl px-4 py-2.5 text-slate-900 dark:text-white outline-none transition-all ${
-            isWhisperMode
-              ? "border-teal-400 focus:ring-2 focus:ring-teal-400 bg-teal-50/30 dark:bg-teal-950/20"
-              : "border-slate-200 dark:border-slate-700 focus:ring-2 focus:ring-slate-900 dark:focus:ring-slate-600 bg-white dark:bg-slate-800"
-          }`}
+          placeholder={isWhisperMode && userTeam ? `Secret to ${userTeam.shortName}...` : "Message or / for commands..."}
+          style={{
+            flex: 1,
+            height: 40,
+            borderRadius: 20,
+            padding: "0 16px",
+            fontSize: 14,
+            background: isWhisperMode ? "rgba(16,185,129,0.06)" : "rgba(255,255,255,0.06)",
+            border: isWhisperMode ? "1px solid rgba(16,185,129,0.3)" : "1px solid rgba(255,255,255,0.08)",
+            color: "rgba(255,255,255,0.9)",
+            outline: "none",
+            transition: "all 0.2s",
+          }}
         />
 
-        {/* Send Button */}
         <button
           type="submit"
           disabled={!text.trim()}
-          className={`p-2.5 rounded-xl text-white transition-all active:scale-95 disabled:opacity-40 ${
-            isWhisperMode
-              ? "bg-teal-600 hover:bg-teal-700"
-              : "bg-blue-600 hover:bg-blue-700 text-white shadow-sm"
-          }`}
+          style={{ width: 40, height: 40, borderRadius: 12, display: "flex", alignItems: "center", justifyContent: "center", flexShrink: 0, background: text.trim() ? (isWhisperMode ? "#059669" : "#2563EB") : "rgba(255,255,255,0.06)", border: "none", color: text.trim() ? "#FFFFFF" : "rgba(255,255,255,0.25)", cursor: text.trim() ? "pointer" : "not-allowed", transition: "all 0.2s" }}
         >
-          <Send className="w-4 h-4" />
+          <Send style={{ width: 16, height: 16 }} />
         </button>
       </form>
     </div>
