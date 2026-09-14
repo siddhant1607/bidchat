@@ -1,6 +1,7 @@
 "use client";
 
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { createPortal } from "react-dom";
 import { LiveAuctionState, Team, AuctionSettings } from "@/types/auction";
 import { getContextualIncrements, formatCurrencyCr } from "@/lib/auctionRules";
 import { generateTeamTheme } from "@/lib/theme";
@@ -104,6 +105,9 @@ export default function AuctionWidget({
   const tableBg = isDark ? "#161616" : "#FAFAFA";
   const tableRowHighlight = isDark ? "#1C1C0A" : "#FFFBEB";
 
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => { setMounted(true); }, []);
+
   // ──────────────────────────────────────────────
   // MINI BAR
   // ──────────────────────────────────────────────
@@ -138,8 +142,8 @@ export default function AuctionWidget({
   // FULL SCREEN
   // ──────────────────────────────────────────────
   if (mode === "full") {
-    return (
-      <div style={{ background: stageBg, color: textPrimary }} className="fixed inset-0 z-50 overflow-y-auto flex flex-col">
+    const fullScreenContent = (
+      <div style={{ background: stageBg, color: textPrimary }} className="fixed inset-0 z-[100] overflow-y-auto flex flex-col">
         {/* Top Bar */}
         <div style={{ borderColor }} className="flex items-center justify-between px-6 py-3 border-b flex-shrink-0">
           <button onClick={() => setMode("half")} style={{ color: textSecondary }} className="flex items-center space-x-1.5 text-xs hover:opacity-80">
@@ -162,25 +166,25 @@ export default function AuctionWidget({
           </div>
         </div>
 
-        <div className="flex-1 p-6 md:p-10 max-w-6xl mx-auto w-full space-y-6">
+        <div className="flex-1 p-3 md:p-10 max-w-6xl mx-auto w-full space-y-3 md:space-y-6">
           {/* Player Card */}
-          <div style={{ background: surfaceBg, border: `1px solid ${borderColor}` }} className="rounded-2xl p-6">
-            <div className="flex items-start justify-between">
-              <div className="flex items-center gap-5">
-                {currentPlayer && <PlayerInitialAvatar name={currentPlayer.name} role={currentPlayer.role} size={72} />}
-                <div>
-                  <p className="text-xs font-bold uppercase tracking-widest mb-1" style={{ color: textSecondary }}>On The Block</p>
-                  <h2 className="text-4xl font-black tracking-tight" style={{ color: textPrimary }}>{currentPlayer?.name || "CALLING NEXT PLAYER"}</h2>
-                  <div className="flex items-center gap-2 mt-2">
-                    {currentPlayer?.role && <span className="px-2.5 py-1 rounded-md text-xs font-bold" style={{ background: (ROLE_COLORS[currentPlayer.role] || "#888") + "22", color: ROLE_COLORS[currentPlayer.role] || "#888" }}>{currentPlayer.role}</span>}
-                    {currentPlayer?.nationality && <span className="px-2.5 py-1 rounded-md text-xs font-bold" style={{ background: isDark ? "#1E3A5F" : "#DBEAFE", color: isDark ? "#93C5FD" : "#1D4ED8" }}>{currentPlayer.nationality}</span>}
-                    {currentPlayer && <span className="px-2.5 py-1 rounded-md text-xs font-bold" style={{ background: isDark ? "#2A2000" : "#FEF9C3", color: isDark ? "#FCD34D" : "#854D0E" }}>Base: {formatCurrencyCr(currentPlayer.basePrice)}</span>}
+          <div style={{ background: surfaceBg, border: `1px solid ${borderColor}` }} className="rounded-2xl p-4 md:p-6">
+            <div className="flex items-center justify-between gap-3">
+              <div className="flex items-center gap-3 md:gap-5 min-w-0">
+                {currentPlayer && <PlayerInitialAvatar name={currentPlayer.name} role={currentPlayer.role} size={48} />}
+                <div className="min-w-0">
+                  <p className="text-[10px] font-bold uppercase tracking-widest mb-0.5" style={{ color: textSecondary }}>On The Block</p>
+                  <h2 className="text-xl md:text-4xl font-black tracking-tight leading-tight truncate" style={{ color: textPrimary }}>{currentPlayer?.name || "CALLING NEXT PLAYER"}</h2>
+                  <div className="flex flex-wrap items-center gap-1.5 mt-1.5">
+                    {currentPlayer?.role && <span className="px-2 py-0.5 rounded-md text-[10px] font-bold" style={{ background: (ROLE_COLORS[currentPlayer.role] || "#888") + "22", color: ROLE_COLORS[currentPlayer.role] || "#888" }}>{currentPlayer.role}</span>}
+                    {currentPlayer?.nationality && <span className="px-2 py-0.5 rounded-md text-[10px] font-bold" style={{ background: isDark ? "#1E3A5F" : "#DBEAFE", color: isDark ? "#93C5FD" : "#1D4ED8" }}>{currentPlayer.nationality}</span>}
+                    {currentPlayer && <span className="px-2 py-0.5 rounded-md text-[10px] font-bold" style={{ background: isDark ? "#2A2000" : "#FEF9C3", color: isDark ? "#FCD34D" : "#854D0E" }}>Base: {formatCurrencyCr(currentPlayer.basePrice)}</span>}
                   </div>
                 </div>
               </div>
               <div className="text-right flex-shrink-0">
-                <p className="text-xs font-bold uppercase tracking-widest" style={{ color: textSecondary }}>TIME LEFT</p>
-                <p className={`text-5xl font-black font-mono mt-1 ${timerSeconds <= 5 ? "text-red-500 animate-pulse" : "text-amber-400"}`}>
+                <p className="text-[9px] font-bold uppercase tracking-widest" style={{ color: textSecondary }}>TIME LEFT</p>
+                <p className={`text-3xl md:text-5xl font-black font-mono mt-0.5 ${timerSeconds <= 5 ? "text-red-500 animate-pulse" : "text-amber-400"}`}>
                   00:{timerSeconds < 10 ? `0${timerSeconds}` : timerSeconds}
                 </p>
               </div>
@@ -281,6 +285,11 @@ export default function AuctionWidget({
         )}
       </div>
     );
+
+    if (mounted && typeof document !== "undefined") {
+      return createPortal(fullScreenContent, document.body);
+    }
+    return fullScreenContent;
   }
 
   // ──────────────────────────────────────────────
@@ -288,26 +297,52 @@ export default function AuctionWidget({
   // ──────────────────────────────────────────────
   return (
     <div style={{ background: stageBg, color: textPrimary }} className="flex-shrink-0 w-full transition-colors duration-300">
-      {/* ── HEADER BAR ── */}
-      <div style={{ borderBottom: `1px solid ${borderColor}` }} className="flex items-center justify-between px-4 py-2.5">
-        <div className="flex items-center gap-2">
-          <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse flex-shrink-0" />
-          <span className="text-[11px] font-black uppercase tracking-widest" style={{ color: textSecondary }}>Auction Stage</span>
+      
+      {/* ── MOBILE COMPACT VIEW (<md) ── */}
+      <div className="md:hidden flex items-center justify-between px-3 py-2.5" style={{ borderBottom: `1px solid ${borderColor}` }}>
+        <div className="flex items-center gap-2 overflow-hidden mr-2">
+          <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse shrink-0" />
+          <div className="flex flex-col min-w-0">
+            <span className="text-xs font-black truncate leading-tight">
+              {currentPlayer ? currentPlayer.name.toUpperCase() : "WAITING FOR PLAYER"}
+            </span>
+            <span className="text-[10px] font-bold text-amber-500 truncate">
+              {leadingTeam ? `${leadingTeam.shortName} · ${formatCurrencyCr(currentBid)}` : "No bids yet"}
+            </span>
+          </div>
         </div>
-        <div className="flex items-center gap-1">
-          {onOpenConsole && (
-            <button onClick={onOpenConsole} className="flex items-center gap-1 px-2 py-1 rounded-lg text-[10px] font-black uppercase hover:opacity-80 transition-all" style={{ background: "#F59E0B22", color: "#F59E0B", border: "1px solid #F59E0B44" }}>🔨 Console</button>
-          )}
-          {onOpenAnalytics && (
-            <button onClick={onOpenAnalytics} className="flex items-center gap-1 px-2 py-1 rounded-lg text-[10px] font-black uppercase hover:opacity-80 transition-all" style={{ background: "#3B82F622", color: "#60A5FA", border: "1px solid #3B82F644" }}><BarChart3 className="w-3 h-3" />Stats</button>
-          )}
-          {onOpenSettings && (
-            <button onClick={onOpenSettings} className="p-1.5 rounded-lg hover:opacity-70 transition-all" style={{ color: textSecondary }} title="Rules & Settings"><Sliders className="w-3.5 h-3.5" /></button>
-          )}
-          <button onClick={() => { if (onToggleCollapse && typeof window !== "undefined" && window.innerWidth >= 768) { onToggleCollapse(); } else { setMode("mini"); } }} className="p-1.5 rounded-lg hover:opacity-70" style={{ color: textSecondary }}><ChevronUp className="w-4 h-4" /></button>
-          <button onClick={() => setMode("full")} className="p-1.5 rounded-lg hover:opacity-70" style={{ color: textSecondary }}><Maximize2 className="w-4 h-4" /></button>
+        <div className="flex items-center gap-2.5 shrink-0">
+          <div className={`text-sm font-mono font-black ${timerSeconds <= 5 ? "text-red-500 animate-pulse" : "text-amber-500"}`}>
+            00:{timerSeconds < 10 ? `0${timerSeconds}` : timerSeconds}
+          </div>
+          <button onClick={() => setMode("full")} className="px-2.5 py-1.5 rounded-lg bg-blue-600 text-white shadow-sm flex items-center gap-1.5 text-[10px] font-black uppercase">
+            <Maximize2 className="w-3.5 h-3.5" /> Expand
+          </button>
         </div>
       </div>
+
+      {/* ── DESKTOP FULL PANEL (>=md) ── */}
+      <div className="hidden md:block">
+        {/* ── HEADER BAR ── */}
+        <div style={{ borderBottom: `1px solid ${borderColor}` }} className="flex items-center justify-between px-4 py-2.5">
+          <div className="flex items-center gap-2">
+            <span className="w-2 h-2 rounded-full bg-red-500 animate-pulse flex-shrink-0" />
+            <span className="text-[11px] font-black uppercase tracking-widest" style={{ color: textSecondary }}>Auction Stage</span>
+          </div>
+          <div className="flex items-center gap-1">
+            {onOpenConsole && (
+              <button onClick={onOpenConsole} className="flex items-center gap-1 px-2 py-1 rounded-lg text-[10px] font-black uppercase hover:opacity-80 transition-all" style={{ background: "#F59E0B22", color: "#F59E0B", border: "1px solid #F59E0B44" }}>🔨 Console</button>
+            )}
+            {onOpenAnalytics && (
+              <button onClick={onOpenAnalytics} className="flex items-center gap-1 px-2 py-1 rounded-lg text-[10px] font-black uppercase hover:opacity-80 transition-all" style={{ background: "#3B82F622", color: "#60A5FA", border: "1px solid #3B82F644" }}><BarChart3 className="w-3 h-3" />Stats</button>
+            )}
+            {onOpenSettings && (
+              <button onClick={onOpenSettings} className="p-1.5 rounded-lg hover:opacity-70 transition-all" style={{ color: textSecondary }} title="Rules & Settings"><Sliders className="w-3.5 h-3.5" /></button>
+            )}
+            <button onClick={() => { if (onToggleCollapse && typeof window !== "undefined" && window.innerWidth >= 768) { onToggleCollapse(); } else { setMode("mini"); } }} className="p-1.5 rounded-lg hover:opacity-70" style={{ color: textSecondary }}><ChevronUp className="w-4 h-4" /></button>
+            <button onClick={() => setMode("full")} className="p-1.5 rounded-lg hover:opacity-70" style={{ color: textSecondary }}><Maximize2 className="w-4 h-4" /></button>
+          </div>
+        </div>
 
       {/* ── TAB BAR ── */}
       <div style={{ borderBottom: `1px solid ${borderColor}` }} className="flex items-center gap-0 px-2 overflow-x-auto scrollbar-none">
@@ -568,6 +603,7 @@ export default function AuctionWidget({
           </div>
         </div>
       )}
+      </div>
     </div>
   );
 }
