@@ -1,0 +1,32 @@
+{
+  "code": "BCR-DJRA5U",
+  "type": "roster",
+  "name": "IPL 2026 Test Super Roster",
+  "createdAt": "2026-09-13T20:04:00.461Z",
+  "item": {
+    "id": "test_123",
+    "name": "IPL 2026 Test Super Roster",
+    "description": "Test shared tournament pool",
+    "isDefault": false,
+    "createdBy": "Tester",
+    "teams": [
+      {
+        "id": "t1",
+        "name": "Chennai Super Kings",
+        "shortName": "CSK",
+        "primaryColor": "#FDB913",
+        "purseCr": 120
+      }
+    ],
+    "players": [
+      {
+        "id": "p1",
+        "name": "MS Dhoni",
+        "role": "WK",
+        "nationality": "IND",
+        "isCapped": true,
+        "basePrice": 2
+      }
+    ]
+  }
+}

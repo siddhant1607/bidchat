@@ -1,0 +1,302 @@
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+// -------------------------------------------------------------
+// NextAuth Models (Jio-compatible, self-hosted via Neon DB)
+// -------------------------------------------------------------
+
+model User {
+  id            String    @id @default(cuid())
+  username      String?   @unique
+  name          String?
+  email         String?   @unique
+  emailVerified DateTime?
+  image         String?
+  password      String?   // Hashed with bcrypt for email/password credentials
+  accounts      Account[]
+  sessions      Session[]
+  
+  // BidChat relationships
+  groupMembers  GroupMember[]
+  ownedGroups   Group[]          @relation("GroupOwner")
+  ownedAuctions Auction[]        @relation("AuctionOwner")
+  managedTeams  AuctionManager[]
+  messages      ChatMessage[]
+  rosters       Roster[]
+  sentFriendRequests     Friendship[] @relation("FriendshipRequester")
+  receivedFriendRequests Friendship[] @relation("FriendshipAddressee")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+model Friendship {
+  id          String   @id @default(cuid())
+  requesterId String
+  addresseeId String
+  status      String   @default("PENDING") // PENDING, ACCEPTED, BLOCKED
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+
+  requester   User @relation("FriendshipRequester", fields: [requesterId], references: [id], onDelete: Cascade)
+  addressee   User @relation("FriendshipAddressee", fields: [addresseeId], references: [id], onDelete: Cascade)
+
+  @@unique([requesterId, addresseeId])
+}
+
+// -------------------------------------------------------------
+// BidChat Social & Group Models
+// -------------------------------------------------------------
+
+model Group {
+  id          String        @id @default(cuid())
+  type        String        @default("GROUP") // GROUP, DIRECT, AUCTION_LOBBY
+  name        String
+  description String?
+  avatarUrl   String?
+  ownerId     String?
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+
+  owner       User?         @relation("GroupOwner", fields: [ownerId], references: [id], onDelete: SetNull)
+  members     GroupMember[]
+  auctions    Auction[]
+  messages    ChatMessage[]
+}
+
+model GroupMember {
+  id        String   @id @default(cuid())
+  groupId   String
+  userId    String
+  role      String   @default("MEMBER") // ADMIN, MEMBER
+  joinedAt  DateTime @default(now())
+
+  group     Group    @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([groupId, userId])
+}
+
+// -------------------------------------------------------------
+// Rosters & Custom Pools (Roster Studio)
+// -------------------------------------------------------------
+
+model Roster {
+  id          String         @id @default(cuid())
+  name        String
+  description String?
+  isDefault   Boolean        @default(false)
+  createdById String?
+  createdAt   DateTime       @default(now())
+  updatedAt   DateTime       @updatedAt
+
+  createdBy   User?          @relation(fields: [createdById], references: [id])
+  players     RosterPlayer[]
+  teams       RosterTeam[]
+  auctions    Auction[]
+}
+
+model RosterTeam {
+  id             String  @id @default(cuid())
+  rosterId       String
+  name           String
+  shortName      String  // e.g. CSK, MI, RCB
+  logoUrl        String
+  primaryColor   String? // Hex code e.g. #FDB913
+  secondaryColor String?
+  accentColor    String?
+
+  roster         Roster  @relation(fields: [rosterId], references: [id], onDelete: Cascade)
+}
+
+model RosterPlayer {
+  id                String   @id @default(cuid())
+  rosterId          String
+  name              String
+  role              String   // BAT, BOWL, AR, WK
+  nationality       String   @default("IND") // IND, OS
+  isCapped          Boolean  @default(false)
+  basePrice         Float    // In Crores (e.g. 2.0, 0.3)
+  prevSoldPrice     Float?   // Last real auction price
+  prevTeam          String?  // Previous franchise (for RTM)
+  rating            Int?     // Optional 1-100 rating
+  realAuctionStatus String?  // SOLD, UNSOLD
+  cricinfoId        String?
+
+  roster            Roster   @relation(fields: [rosterId], references: [id], onDelete: Cascade)
+}
+
+// -------------------------------------------------------------
+// Live Auction Engine
+// -------------------------------------------------------------
+
+model Auction {
+  id                String            @id @default(cuid())
+  groupId           String
+  rosterId          String?
+  name              String
+  status            String            @default("LOBBY") // LOBBY, ACTIVE, PAUSED, COMPLETED
+  scheduledAt       DateTime?
+  startedAt         DateTime?
+  endedAt           DateTime?
+
+  // Rules & Configuration
+  totalPurse        Float             @default(125.0) // In Crores
+  minSquadSize      Int               @default(18)
+  maxSquadSize      Int               @default(25)
+  maxOverseas       Int               @default(8)
+  rtmEnabled        Boolean           @default(true)
+  rtmStyle          String            @default("ESCALATION_2025")
+  timerDuration     Int               @default(30)
+  antiSnipeSeconds  Int               @default(10)
+  pointsSystem      String            @default("EXCEL_MVP") // EXCEL_MVP, MANUAL, NONE
+  joinApproval      String            @default("OPEN") // OPEN, APPROVAL_REQUIRED
+
+  ownerId           String
+  auctioneerId      String?
+
+  group             Group             @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  roster            Roster?           @relation(fields: [rosterId], references: [id])
+  owner             User              @relation("AuctionOwner", fields: [ownerId], references: [id])
+  teams             AuctionTeam[]
+  bids              Bid[]
+  sales             PlayerSale[]
+  pointEntries      PointEntry[]
+
+  createdAt         DateTime          @default(now())
+  updatedAt         DateTime          @updatedAt
+}
+
+model AuctionTeam {
+  id             String           @id @default(cuid())
+  auctionId      String
+  name           String
+  shortName      String
+  logoUrl        String
+  primaryColor   String?
+  secondaryColor String?
+  purseRemaining Float
+  totalSpent     Float            @default(0.0)
+  ownerApprovalRequired Boolean   @default(false)
+
+  auction        Auction          @relation(fields: [auctionId], references: [id], onDelete: Cascade)
+  managers       AuctionManager[]
+  sales          PlayerSale[]
+}
+
+model AuctionManager {
+  id            String      @id @default(cuid())
+  auctionTeamId String
+  userId        String
+  role          String      @default("MEMBER") // OWNER, MEMBER
+
+  team          AuctionTeam @relation(fields: [auctionTeamId], references: [id], onDelete: Cascade)
+  user          User        @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([auctionTeamId, userId])
+}
+
+model Bid {
+  id          String   @id @default(cuid())
+  auctionId   String
+  playerId    String
+  teamId      String
+  bidderId    String
+  amount      Float    // In Crores
+  timestamp   DateTime @default(now())
+
+  auction     Auction  @relation(fields: [auctionId], references: [id], onDelete: Cascade)
+}
+
+model PlayerSale {
+  id          String       @id @default(cuid())
+  auctionId   String
+  playerId    String
+  teamId      String?      // Null if UNSOLD
+  soldPrice   Float
+  isRtm       Boolean      @default(false)
+  timestamp   DateTime     @default(now())
+
+  auction     Auction      @relation(fields: [auctionId], references: [id], onDelete: Cascade)
+  team        AuctionTeam? @relation(fields: [teamId], references: [id])
+}
+
+// -------------------------------------------------------------
+// Chat & Invisible Whispers
+// -------------------------------------------------------------
+
+model ChatMessage {
+  id            String   @id @default(cuid())
+  groupId       String
+  auctionId     String?
+  senderId      String
+  text          String
+  isWhisper     Boolean  @default(false)
+  whisperTeamId String?  // If whisper, which team dugout
+  eventCardType String?  // e.g. "SOLD", "RTM", "UNSOLD"
+  replyToId     String?
+  createdAt     DateTime @default(now())
+
+  group         Group    @relation(fields: [groupId], references: [id], onDelete: Cascade)
+  sender        User     @relation(fields: [senderId], references: [id], onDelete: Cascade)
+}
+
+// -------------------------------------------------------------
+// Excel / Custom Match Points
+// -------------------------------------------------------------
+
+model PointEntry {
+  id             String   @id @default(cuid())
+  auctionId      String
+  playerName     String
+  teamName       String
+  totalImpact    Float    @default(0)
+  impactPerMatch Float    @default(0)
+  matches        Int      @default(0)
+  runs           Int      @default(0)
+  wickets        Int      @default(0)
+  updatedAt      DateTime @updatedAt
+
+  auction        Auction  @relation(fields: [auctionId], references: [id], onDelete: Cascade)
+}

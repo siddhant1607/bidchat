@@ -1,0 +1,2022 @@
+[
+  {
+    "rank": 1,
+    "name": "Vaibhav Sooryavanshi",
+    "team": "RR",
+    "totalImpact": 1012.2,
+    "impactPerMatch": 63.2,
+    "matches": 16,
+    "runs": 776,
+    "wickets": 0
+  },
+  {
+    "rank": 2,
+    "name": "Bhuvneshwar Kumar",
+    "team": "RCB",
+    "totalImpact": 791.4,
+    "impactPerMatch": 49.4,
+    "matches": 16,
+    "runs": 34,
+    "wickets": 28
+  },
+  {
+    "rank": 3,
+    "name": "Kagiso Rabada",
+    "team": "GT",
+    "totalImpact": 785.5,
+    "impactPerMatch": 46.2,
+    "matches": 17,
+    "runs": 47,
+    "wickets": 29
+  },
+  {
+    "rank": 4,
+    "name": "Jofra Archer",
+    "team": "RR",
+    "totalImpact": 763.6,
+    "impactPerMatch": 47.7,
+    "matches": 16,
+    "runs": 64,
+    "wickets": 25
+  },
+  {
+    "rank": 5,
+    "name": "Shubman Gill",
+    "team": "GT",
+    "totalImpact": 662.1,
+    "impactPerMatch": 41.3,
+    "matches": 16,
+    "runs": 732,
+    "wickets": 0
+  },
+  {
+    "rank": 6,
+    "name": "Ishan Kishan",
+    "team": "SRH",
+    "totalImpact": 647.6,
+    "impactPerMatch": 43.1,
+    "matches": 15,
+    "runs": 602,
+    "wickets": 0
+  },
+  {
+    "rank": 7,
+    "name": "Sai Sudharsan",
+    "team": "GT",
+    "totalImpact": 635.7,
+    "impactPerMatch": 37.3,
+    "matches": 17,
+    "runs": 722,
+    "wickets": 0
+  },
+  {
+    "rank": 8,
+    "name": "Abhishek Sharma",
+    "team": "SRH",
+    "totalImpact": 606.9,
+    "impactPerMatch": 40.4,
+    "matches": 15,
+    "runs": 563,
+    "wickets": 0
+  },
+  {
+    "rank": 9,
+    "name": "Virat Kohli",
+    "team": "RCB",
+    "totalImpact": 602.6,
+    "impactPerMatch": 37.6,
+    "matches": 16,
+    "runs": 675,
+    "wickets": 0
+  },
+  {
+    "rank": 10,
+    "name": "Mohammed Siraj",
+    "team": "GT",
+    "totalImpact": 594.8,
+    "impactPerMatch": 34.9,
+    "matches": 17,
+    "runs": 5,
+    "wickets": 19
+  },
+  {
+    "rank": 11,
+    "name": "Mitchell Marsh",
+    "team": "LSG",
+    "totalImpact": 581.0,
+    "impactPerMatch": 44.6,
+    "matches": 13,
+    "runs": 563,
+    "wickets": 0
+  },
+  {
+    "rank": 12,
+    "name": "Sunil Narine",
+    "team": "KKR",
+    "totalImpact": 563.7,
+    "impactPerMatch": 43.3,
+    "matches": 13,
+    "runs": 40,
+    "wickets": 15
+  },
+  {
+    "rank": 13,
+    "name": "Krunal Pandya",
+    "team": "RCB",
+    "totalImpact": 555.4,
+    "impactPerMatch": 34.7,
+    "matches": 16,
+    "runs": 226,
+    "wickets": 14
+  },
+  {
+    "rank": 14,
+    "name": "Sanju Samson",
+    "team": "CSK",
+    "totalImpact": 552.8,
+    "impactPerMatch": 39.4,
+    "matches": 14,
+    "runs": 477,
+    "wickets": 0
+  },
+  {
+    "rank": 15,
+    "name": "KL Rahul",
+    "team": "DC",
+    "totalImpact": 544.7,
+    "impactPerMatch": 38.9,
+    "matches": 14,
+    "runs": 593,
+    "wickets": 0
+  },
+  {
+    "rank": 16,
+    "name": "Rajat Patidar",
+    "team": "RCB",
+    "totalImpact": 542.7,
+    "impactPerMatch": 36.1,
+    "matches": 15,
+    "runs": 501,
+    "wickets": 0
+  },
+  {
+    "rank": 17,
+    "name": "Axar Patel",
+    "team": "DC",
+    "totalImpact": 532.6,
+    "impactPerMatch": 38.0,
+    "matches": 14,
+    "runs": 173,
+    "wickets": 11
+  },
+  {
+    "rank": 18,
+    "name": "Heinrich Klaasen",
+    "team": "SRH",
+    "totalImpact": 520.6,
+    "impactPerMatch": 34.7,
+    "matches": 15,
+    "runs": 624,
+    "wickets": 0
+  },
+  {
+    "rank": 19,
+    "name": "Mohammed Shami",
+    "team": "LSG",
+    "totalImpact": 518.9,
+    "impactPerMatch": 39.9,
+    "matches": 13,
+    "runs": 31,
+    "wickets": 12
+  },
+  {
+    "rank": 20,
+    "name": "Eshan Malinga",
+    "team": "SRH",
+    "totalImpact": 516.0,
+    "impactPerMatch": 34.4,
+    "matches": 15,
+    "runs": 7,
+    "wickets": 20
+  },
+  {
+    "rank": 21,
+    "name": "Prince Yadav",
+    "team": "LSG",
+    "totalImpact": 498.3,
+    "impactPerMatch": 35.5,
+    "matches": 14,
+    "runs": 0,
+    "wickets": 16
+  },
+  {
+    "rank": 22,
+    "name": "Nitish Kumar Reddy",
+    "team": "SRH",
+    "totalImpact": 495.4,
+    "impactPerMatch": 35.3,
+    "matches": 14,
+    "runs": 302,
+    "wickets": 8
+  },
+  {
+    "rank": 23,
+    "name": "Jamie Overton",
+    "team": "CSK",
+    "totalImpact": 476.3,
+    "impactPerMatch": 47.6,
+    "matches": 10,
+    "runs": 136,
+    "wickets": 14
+  },
+  {
+    "rank": 24,
+    "name": "Rashid Khan",
+    "team": "GT",
+    "totalImpact": 474.7,
+    "impactPerMatch": 27.9,
+    "matches": 17,
+    "runs": 50,
+    "wickets": 20
+  },
+  {
+    "rank": 25,
+    "name": "Ravindra Jadeja",
+    "team": "RR",
+    "totalImpact": 444.3,
+    "impactPerMatch": 31.7,
+    "matches": 14,
+    "runs": 266,
+    "wickets": 10
+  },
+  {
+    "rank": 26,
+    "name": "Cameron Green",
+    "team": "KKR",
+    "totalImpact": 440.4,
+    "impactPerMatch": 31.4,
+    "matches": 14,
+    "runs": 322,
+    "wickets": 7
+  },
+  {
+    "rank": 27,
+    "name": "Lungi Ngidi",
+    "team": "DC",
+    "totalImpact": 440.2,
+    "impactPerMatch": 36.6,
+    "matches": 12,
+    "runs": 4,
+    "wickets": 13
+  },
+  {
+    "rank": 28,
+    "name": "Ryan Rickelton",
+    "team": "MI",
+    "totalImpact": 438.4,
+    "impactPerMatch": 36.5,
+    "matches": 12,
+    "runs": 448,
+    "wickets": 0
+  },
+  {
+    "rank": 29,
+    "name": "Prabhsimran Singh",
+    "team": "PBKS",
+    "totalImpact": 432.9,
+    "impactPerMatch": 30.9,
+    "matches": 14,
+    "runs": 510,
+    "wickets": 0
+  },
+  {
+    "rank": 30,
+    "name": "Jos Buttler",
+    "team": "GT",
+    "totalImpact": 429.1,
+    "impactPerMatch": 25.2,
+    "matches": 17,
+    "runs": 526,
+    "wickets": 0
+  },
+  {
+    "rank": 31,
+    "name": "Kartik Tyagi",
+    "team": "KKR",
+    "totalImpact": 426.6,
+    "impactPerMatch": 30.4,
+    "matches": 14,
+    "runs": 11,
+    "wickets": 18
+  },
+  {
+    "rank": 32,
+    "name": "Anshul Kamboj",
+    "team": "CSK",
+    "totalImpact": 422.9,
+    "impactPerMatch": 30.2,
+    "matches": 14,
+    "runs": 58,
+    "wickets": 21
+  },
+  {
+    "rank": 33,
+    "name": "Jason Holder",
+    "team": "GT",
+    "totalImpact": 420.1,
+    "impactPerMatch": 38.1,
+    "matches": 11,
+    "runs": 65,
+    "wickets": 17
+  },
+  {
+    "rank": 34,
+    "name": "Devdutt Padikkal",
+    "team": "RCB",
+    "totalImpact": 417.5,
+    "impactPerMatch": 26.0,
+    "matches": 16,
+    "runs": 464,
+    "wickets": 0
+  },
+  {
+    "rank": 35,
+    "name": "Finn Allen",
+    "team": "KKR",
+    "totalImpact": 414.5,
+    "impactPerMatch": 37.6,
+    "matches": 11,
+    "runs": 349,
+    "wickets": 0
+  },
+  {
+    "rank": 36,
+    "name": "Noor Ahmad",
+    "team": "CSK",
+    "totalImpact": 410.5,
+    "impactPerMatch": 29.3,
+    "matches": 14,
+    "runs": 11,
+    "wickets": 13
+  },
+  {
+    "rank": 37,
+    "name": "Dhruv Jurel",
+    "team": "RR",
+    "totalImpact": 408.8,
+    "impactPerMatch": 25.5,
+    "matches": 16,
+    "runs": 515,
+    "wickets": 0
+  },
+  {
+    "rank": 38,
+    "name": "Priyansh Arya",
+    "team": "PBKS",
+    "totalImpact": 398.0,
+    "impactPerMatch": 30.6,
+    "matches": 13,
+    "runs": 364,
+    "wickets": 0
+  },
+  {
+    "rank": 39,
+    "name": "Arshdeep Singh",
+    "team": "PBKS",
+    "totalImpact": 382.6,
+    "impactPerMatch": 27.3,
+    "matches": 14,
+    "runs": 1,
+    "wickets": 14
+  },
+  {
+    "rank": 40,
+    "name": "Josh Hazlewood",
+    "team": "RCB",
+    "totalImpact": 378.6,
+    "impactPerMatch": 29.1,
+    "matches": 13,
+    "runs": 0,
+    "wickets": 15
+  },
+  {
+    "rank": 41,
+    "name": "Travis Head",
+    "team": "SRH",
+    "totalImpact": 376.9,
+    "impactPerMatch": 25.1,
+    "matches": 15,
+    "runs": 410,
+    "wickets": 1
+  },
+  {
+    "rank": 42,
+    "name": "Nandre Burger",
+    "team": "RR",
+    "totalImpact": 368.8,
+    "impactPerMatch": 28.3,
+    "matches": 13,
+    "runs": 14,
+    "wickets": 14
+  },
+  {
+    "rank": 43,
+    "name": "Mohsin Khan",
+    "team": "LSG",
+    "totalImpact": 362.0,
+    "impactPerMatch": 51.7,
+    "matches": 7,
+    "runs": 0,
+    "wickets": 11
+  },
+  {
+    "rank": 44,
+    "name": "Washington Sundar",
+    "team": "GT",
+    "totalImpact": 360.0,
+    "impactPerMatch": 21.1,
+    "matches": 17,
+    "runs": 377,
+    "wickets": 1
+  },
+  {
+    "rank": 45,
+    "name": "Tilak Varma",
+    "team": "MI",
+    "totalImpact": 356.6,
+    "impactPerMatch": 25.4,
+    "matches": 14,
+    "runs": 359,
+    "wickets": 0
+  },
+  {
+    "rank": 46,
+    "name": "AM Ghazanfar",
+    "team": "MI",
+    "totalImpact": 351.1,
+    "impactPerMatch": 31.9,
+    "matches": 11,
+    "runs": 2,
+    "wickets": 15
+  },
+  {
+    "rank": 47,
+    "name": "Yuzvendra Chahal",
+    "team": "PBKS",
+    "totalImpact": 349.7,
+    "impactPerMatch": 24.9,
+    "matches": 14,
+    "runs": 0,
+    "wickets": 12
+  },
+  {
+    "rank": 48,
+    "name": "Shreyas Iyer",
+    "team": "PBKS",
+    "totalImpact": 343.9,
+    "impactPerMatch": 24.5,
+    "matches": 14,
+    "runs": 498,
+    "wickets": 0
+  },
+  {
+    "rank": 49,
+    "name": "Brijesh Sharma",
+    "team": "RR",
+    "totalImpact": 343.6,
+    "impactPerMatch": 26.4,
+    "matches": 13,
+    "runs": 2,
+    "wickets": 14
+  },
+  {
+    "rank": 50,
+    "name": "Yashasvi Jaiswal",
+    "team": "RR",
+    "totalImpact": 343.3,
+    "impactPerMatch": 21.4,
+    "matches": 16,
+    "runs": 427,
+    "wickets": 0
+  },
+  {
+    "rank": 51,
+    "name": "Varun Chakravarthy",
+    "team": "KKR",
+    "totalImpact": 337.7,
+    "impactPerMatch": 30.7,
+    "matches": 11,
+    "runs": 5,
+    "wickets": 11
+  },
+  {
+    "rank": 52,
+    "name": "Marco Jansen",
+    "team": "PBKS",
+    "totalImpact": 333.6,
+    "impactPerMatch": 25.6,
+    "matches": 13,
+    "runs": 51,
+    "wickets": 9
+  },
+  {
+    "rank": 53,
+    "name": "Sakib Hussain",
+    "team": "SRH",
+    "totalImpact": 333.2,
+    "impactPerMatch": 30.2,
+    "matches": 11,
+    "runs": 5,
+    "wickets": 15
+  },
+  {
+    "rank": 54,
+    "name": "Jasprit Bumrah",
+    "team": "MI",
+    "totalImpact": 326.4,
+    "impactPerMatch": 25.1,
+    "matches": 13,
+    "runs": 7,
+    "wickets": 4
+  },
+  {
+    "rank": 55,
+    "name": "Rasikh Salam",
+    "team": "RCB",
+    "totalImpact": 322.5,
+    "impactPerMatch": 26.8,
+    "matches": 12,
+    "runs": 3,
+    "wickets": 19
+  },
+  {
+    "rank": 56,
+    "name": "Corbin Bosch",
+    "team": "MI",
+    "totalImpact": 317.7,
+    "impactPerMatch": 52.9,
+    "matches": 6,
+    "runs": 50,
+    "wickets": 12
+  },
+  {
+    "rank": 57,
+    "name": "Prasidh Krishna",
+    "team": "GT",
+    "totalImpact": 313.7,
+    "impactPerMatch": 26.1,
+    "matches": 12,
+    "runs": 6,
+    "wickets": 16
+  },
+  {
+    "rank": 58,
+    "name": "Riyan Parag",
+    "team": "RR",
+    "totalImpact": 309.0,
+    "impactPerMatch": 22.0,
+    "matches": 14,
+    "runs": 309,
+    "wickets": 2
+  },
+  {
+    "rank": 59,
+    "name": "Praful Hinge",
+    "team": "SRH",
+    "totalImpact": 304.4,
+    "impactPerMatch": 43.4,
+    "matches": 7,
+    "runs": 3,
+    "wickets": 14
+  },
+  {
+    "rank": 60,
+    "name": "Angkrish Raghuvanshi",
+    "team": "KKR",
+    "totalImpact": 303.4,
+    "impactPerMatch": 23.3,
+    "matches": 13,
+    "runs": 422,
+    "wickets": 0
+  },
+  {
+    "rank": 61,
+    "name": "Pat Cummins",
+    "team": "SRH",
+    "totalImpact": 298.4,
+    "impactPerMatch": 37.3,
+    "matches": 8,
+    "runs": 30,
+    "wickets": 8
+  },
+  {
+    "rank": 62,
+    "name": "Donovan Ferreira",
+    "team": "RR",
+    "totalImpact": 297.9,
+    "impactPerMatch": 19.8,
+    "matches": 15,
+    "runs": 317,
+    "wickets": 1
+  },
+  {
+    "rank": 63,
+    "name": "Cooper Connolly",
+    "team": "PBKS",
+    "totalImpact": 297.2,
+    "impactPerMatch": 21.2,
+    "matches": 14,
+    "runs": 491,
+    "wickets": 0
+  },
+  {
+    "rank": 64,
+    "name": "Tim David",
+    "team": "RCB",
+    "totalImpact": 283.0,
+    "impactPerMatch": 17.6,
+    "matches": 16,
+    "runs": 305,
+    "wickets": 0
+  },
+  {
+    "rank": 65,
+    "name": "Anukul Roy",
+    "team": "KKR",
+    "totalImpact": 278.6,
+    "impactPerMatch": 19.9,
+    "matches": 14,
+    "runs": 52,
+    "wickets": 9
+  },
+  {
+    "rank": 66,
+    "name": "Kuldeep Yadav",
+    "team": "DC",
+    "totalImpact": 277.1,
+    "impactPerMatch": 23.0,
+    "matches": 12,
+    "runs": 9,
+    "wickets": 10
+  },
+  {
+    "rank": 67,
+    "name": "Pathum Nissanka",
+    "team": "DC",
+    "totalImpact": 273.9,
+    "impactPerMatch": 27.3,
+    "matches": 10,
+    "runs": 278,
+    "wickets": 0
+  },
+  {
+    "rank": 68,
+    "name": "Naman Dhir",
+    "team": "MI",
+    "totalImpact": 273.4,
+    "impactPerMatch": 19.5,
+    "matches": 14,
+    "runs": 318,
+    "wickets": 0
+  },
+  {
+    "rank": 69,
+    "name": "Rinku Singh",
+    "team": "KKR",
+    "totalImpact": 268.5,
+    "impactPerMatch": 19.1,
+    "matches": 14,
+    "runs": 295,
+    "wickets": 0
+  },
+  {
+    "rank": 70,
+    "name": "Shardul Thakur",
+    "team": "MI",
+    "totalImpact": 265.5,
+    "impactPerMatch": 29.5,
+    "matches": 9,
+    "runs": 24,
+    "wickets": 12
+  },
+  {
+    "rank": 71,
+    "name": "Mukesh Choudhary",
+    "team": "CSK",
+    "totalImpact": 263.6,
+    "impactPerMatch": 32.9,
+    "matches": 8,
+    "runs": 2,
+    "wickets": 8
+  },
+  {
+    "rank": 72,
+    "name": "Yash Raj Punja",
+    "team": "RR",
+    "totalImpact": 262.6,
+    "impactPerMatch": 32.8,
+    "matches": 8,
+    "runs": 0,
+    "wickets": 9
+  },
+  {
+    "rank": 73,
+    "name": "Mitchell Starc",
+    "team": "DC",
+    "totalImpact": 258.3,
+    "impactPerMatch": 43.0,
+    "matches": 6,
+    "runs": 0,
+    "wickets": 11
+  },
+  {
+    "rank": 74,
+    "name": "Josh Inglis",
+    "team": "LSG",
+    "totalImpact": 257.7,
+    "impactPerMatch": 51.5,
+    "matches": 5,
+    "runs": 266,
+    "wickets": 0
+  },
+  {
+    "rank": 75,
+    "name": "Suryakumar Yadav",
+    "team": "MI",
+    "totalImpact": 254.1,
+    "impactPerMatch": 19.5,
+    "matches": 13,
+    "runs": 269,
+    "wickets": 0
+  },
+  {
+    "rank": 76,
+    "name": "Vaibhav Arora",
+    "team": "KKR",
+    "totalImpact": 246.4,
+    "impactPerMatch": 22.4,
+    "matches": 11,
+    "runs": 1,
+    "wickets": 11
+  },
+  {
+    "rank": 77,
+    "name": "Shivam Dube",
+    "team": "CSK",
+    "totalImpact": 245.3,
+    "impactPerMatch": 18.8,
+    "matches": 13,
+    "runs": 270,
+    "wickets": 1
+  },
+  {
+    "rank": 78,
+    "name": "Ajinkya Rahane",
+    "team": "KKR",
+    "totalImpact": 243.4,
+    "impactPerMatch": 17.3,
+    "matches": 14,
+    "runs": 335,
+    "wickets": 0
+  },
+  {
+    "rank": 79,
+    "name": "Kartik Sharma",
+    "team": "CSK",
+    "totalImpact": 243.1,
+    "impactPerMatch": 22.1,
+    "matches": 11,
+    "runs": 295,
+    "wickets": 0
+  },
+  {
+    "rank": 80,
+    "name": "Sameer Rizvi",
+    "team": "DC",
+    "totalImpact": 242.4,
+    "impactPerMatch": 22.0,
+    "matches": 11,
+    "runs": 252,
+    "wickets": 0
+  },
+  {
+    "rank": 81,
+    "name": "Rohit Sharma",
+    "team": "MI",
+    "totalImpact": 239.7,
+    "impactPerMatch": 26.6,
+    "matches": 9,
+    "runs": 283,
+    "wickets": 0
+  },
+  {
+    "rank": 82,
+    "name": "Venkatesh Iyer",
+    "team": "RCB",
+    "totalImpact": 239.0,
+    "impactPerMatch": 34.1,
+    "matches": 7,
+    "runs": 209,
+    "wickets": 0
+  },
+  {
+    "rank": 83,
+    "name": "Rishabh Pant",
+    "team": "LSG",
+    "totalImpact": 235.2,
+    "impactPerMatch": 16.8,
+    "matches": 14,
+    "runs": 312,
+    "wickets": 0
+  },
+  {
+    "rank": 84,
+    "name": "Shivang Kumar",
+    "team": "SRH",
+    "totalImpact": 235.0,
+    "impactPerMatch": 18.0,
+    "matches": 13,
+    "runs": 53,
+    "wickets": 9
+  },
+  {
+    "rank": 85,
+    "name": "Deepak Chahar",
+    "team": "MI",
+    "totalImpact": 231.3,
+    "impactPerMatch": 28.9,
+    "matches": 8,
+    "runs": 25,
+    "wickets": 8
+  },
+  {
+    "rank": 86,
+    "name": "Ayush Badoni",
+    "team": "LSG",
+    "totalImpact": 229.5,
+    "impactPerMatch": 22.9,
+    "matches": 10,
+    "runs": 215,
+    "wickets": 0
+  },
+  {
+    "rank": 87,
+    "name": "Hardik Pandya",
+    "team": "MI",
+    "totalImpact": 228.4,
+    "impactPerMatch": 22.8,
+    "matches": 10,
+    "runs": 206,
+    "wickets": 4
+  },
+  {
+    "rank": 88,
+    "name": "Ravi Bishnoi",
+    "team": "RR",
+    "totalImpact": 225.7,
+    "impactPerMatch": 25.0,
+    "matches": 9,
+    "runs": 0,
+    "wickets": 11
+  },
+  {
+    "rank": 89,
+    "name": "Shashank Singh",
+    "team": "PBKS",
+    "totalImpact": 225.0,
+    "impactPerMatch": 18.7,
+    "matches": 12,
+    "runs": 132,
+    "wickets": 4
+  },
+  {
+    "rank": 90,
+    "name": "Suyash Sharma",
+    "team": "RCB",
+    "totalImpact": 221.8,
+    "impactPerMatch": 18.4,
+    "matches": 12,
+    "runs": 0,
+    "wickets": 9
+  },
+  {
+    "rank": 91,
+    "name": "Akeal Hosein",
+    "team": "CSK",
+    "totalImpact": 221.4,
+    "impactPerMatch": 31.6,
+    "matches": 7,
+    "runs": 5,
+    "wickets": 8
+  },
+  {
+    "rank": 92,
+    "name": "Ayush Mhatre",
+    "team": "CSK",
+    "totalImpact": 219.4,
+    "impactPerMatch": 36.5,
+    "matches": 6,
+    "runs": 201,
+    "wickets": 0
+  },
+  {
+    "rank": 93,
+    "name": "Ruturaj Gaikwad",
+    "team": "CSK",
+    "totalImpact": 215.6,
+    "impactPerMatch": 15.4,
+    "matches": 14,
+    "runs": 337,
+    "wickets": 0
+  },
+  {
+    "rank": 94,
+    "name": "Sarfaraz Khan",
+    "team": "CSK",
+    "totalImpact": 208.3,
+    "impactPerMatch": 26.0,
+    "matches": 8,
+    "runs": 161,
+    "wickets": 0
+  },
+  {
+    "rank": 95,
+    "name": "Jacob Duffy",
+    "team": "RCB",
+    "totalImpact": 203.9,
+    "impactPerMatch": 33.9,
+    "matches": 6,
+    "runs": 0,
+    "wickets": 9
+  },
+  {
+    "rank": 96,
+    "name": "Will Jacks",
+    "team": "MI",
+    "totalImpact": 201.6,
+    "impactPerMatch": 28.8,
+    "matches": 7,
+    "runs": 139,
+    "wickets": 2
+  },
+  {
+    "rank": 97,
+    "name": "Ashutosh Sharma",
+    "team": "DC",
+    "totalImpact": 200.3,
+    "impactPerMatch": 25.0,
+    "matches": 8,
+    "runs": 171,
+    "wickets": 0
+  },
+  {
+    "rank": 98,
+    "name": "David Miller",
+    "team": "DC",
+    "totalImpact": 198.8,
+    "impactPerMatch": 18.0,
+    "matches": 11,
+    "runs": 211,
+    "wickets": 0
+  },
+  {
+    "rank": 99,
+    "name": "Mukesh Kumar",
+    "team": "DC",
+    "totalImpact": 196.8,
+    "impactPerMatch": 19.6,
+    "matches": 10,
+    "runs": 0,
+    "wickets": 6
+  },
+  {
+    "rank": 100,
+    "name": "Vijaykumar Vyshak",
+    "team": "PBKS",
+    "totalImpact": 188.5,
+    "impactPerMatch": 18.8,
+    "matches": 10,
+    "runs": 2,
+    "wickets": 9
+  },
+  {
+    "rank": 101,
+    "name": "Harsh Dubey",
+    "team": "SRH",
+    "totalImpact": 185.7,
+    "impactPerMatch": 23.2,
+    "matches": 8,
+    "runs": 13,
+    "wickets": 8
+  },
+  {
+    "rank": 102,
+    "name": "Tristan Stubbs",
+    "team": "DC",
+    "totalImpact": 182.0,
+    "impactPerMatch": 13.0,
+    "matches": 14,
+    "runs": 275,
+    "wickets": 0
+  },
+  {
+    "rank": 103,
+    "name": "Manimaran Siddharth",
+    "team": "LSG",
+    "totalImpact": 179.5,
+    "impactPerMatch": 44.8,
+    "matches": 4,
+    "runs": 0,
+    "wickets": 6
+  },
+  {
+    "rank": 104,
+    "name": "Phil Salt",
+    "team": "RCB",
+    "totalImpact": 165.3,
+    "impactPerMatch": 27.5,
+    "matches": 6,
+    "runs": 202,
+    "wickets": 0
+  },
+  {
+    "rank": 105,
+    "name": "Marcus Stoinis",
+    "team": "PBKS",
+    "totalImpact": 164.8,
+    "impactPerMatch": 12.6,
+    "matches": 13,
+    "runs": 216,
+    "wickets": 2
+  },
+  {
+    "rank": 106,
+    "name": "Urvil Patel",
+    "team": "CSK",
+    "totalImpact": 163.3,
+    "impactPerMatch": 23.3,
+    "matches": 7,
+    "runs": 129,
+    "wickets": 0
+  },
+  {
+    "rank": 107,
+    "name": "Rovman Powell",
+    "team": "KKR",
+    "totalImpact": 162.0,
+    "impactPerMatch": 14.7,
+    "matches": 11,
+    "runs": 190,
+    "wickets": 0
+  },
+  {
+    "rank": 108,
+    "name": "Mukul Choudhary",
+    "team": "LSG",
+    "totalImpact": 160.5,
+    "impactPerMatch": 16.0,
+    "matches": 10,
+    "runs": 170,
+    "wickets": 0
+  },
+  {
+    "rank": 109,
+    "name": "Nitish Rana",
+    "team": "DC",
+    "totalImpact": 159.5,
+    "impactPerMatch": 17.7,
+    "matches": 9,
+    "runs": 225,
+    "wickets": 0
+  },
+  {
+    "rank": 110,
+    "name": "Madhav Tiwari",
+    "team": "DC",
+    "totalImpact": 154.9,
+    "impactPerMatch": 51.6,
+    "matches": 3,
+    "runs": 18,
+    "wickets": 4
+  },
+  {
+    "rank": 111,
+    "name": "Xavier Bartlett",
+    "team": "PBKS",
+    "totalImpact": 153.2,
+    "impactPerMatch": 17.0,
+    "matches": 9,
+    "runs": 29,
+    "wickets": 5
+  },
+  {
+    "rank": 112,
+    "name": "Arshad Khan",
+    "team": "GT",
+    "totalImpact": 150.9,
+    "impactPerMatch": 18.8,
+    "matches": 8,
+    "runs": 23,
+    "wickets": 6
+  },
+  {
+    "rank": 113,
+    "name": "Saurabh Dubey",
+    "team": "KKR",
+    "totalImpact": 144.8,
+    "impactPerMatch": 36.2,
+    "matches": 4,
+    "runs": 4,
+    "wickets": 5
+  },
+  {
+    "rank": 114,
+    "name": "Aiden Markram",
+    "team": "LSG",
+    "totalImpact": 136.8,
+    "impactPerMatch": 11.4,
+    "matches": 12,
+    "runs": 231,
+    "wickets": 0
+  },
+  {
+    "rank": 115,
+    "name": "Rahul Tewatia",
+    "team": "GT",
+    "totalImpact": 135.4,
+    "impactPerMatch": 8.4,
+    "matches": 16,
+    "runs": 190,
+    "wickets": 0
+  },
+  {
+    "rank": 116,
+    "name": "Tushar Deshpande",
+    "team": "RR",
+    "totalImpact": 134.6,
+    "impactPerMatch": 19.2,
+    "matches": 7,
+    "runs": 26,
+    "wickets": 4
+  },
+  {
+    "rank": 117,
+    "name": "Shahbaz Ahmed",
+    "team": "LSG",
+    "totalImpact": 134.5,
+    "impactPerMatch": 26.9,
+    "matches": 5,
+    "runs": 58,
+    "wickets": 5
+  },
+  {
+    "rank": 118,
+    "name": "T Natarajan",
+    "team": "DC",
+    "totalImpact": 134.0,
+    "impactPerMatch": 13.4,
+    "matches": 10,
+    "runs": 1,
+    "wickets": 5
+  },
+  {
+    "rank": 119,
+    "name": "Nicholas Pooran",
+    "team": "LSG",
+    "totalImpact": 130.5,
+    "impactPerMatch": 9.3,
+    "matches": 14,
+    "runs": 234,
+    "wickets": 0
+  },
+  {
+    "rank": 120,
+    "name": "Quinton de Kock",
+    "team": "MI",
+    "totalImpact": 129.9,
+    "impactPerMatch": 43.3,
+    "matches": 3,
+    "runs": 132,
+    "wickets": 0
+  },
+  {
+    "rank": 121,
+    "name": "Mitchell Santner",
+    "team": "MI",
+    "totalImpact": 128.9,
+    "impactPerMatch": 32.2,
+    "matches": 4,
+    "runs": 26,
+    "wickets": 5
+  },
+  {
+    "rank": 122,
+    "name": "Romario Shepherd",
+    "team": "RCB",
+    "totalImpact": 128.5,
+    "impactPerMatch": 8.5,
+    "matches": 15,
+    "runs": 83,
+    "wickets": 7
+  },
+  {
+    "rank": 123,
+    "name": "Avesh Khan",
+    "team": "LSG",
+    "totalImpact": 126.5,
+    "impactPerMatch": 18.0,
+    "matches": 7,
+    "runs": 6,
+    "wickets": 6
+  },
+  {
+    "rank": 124,
+    "name": "Salil Arora",
+    "team": "SRH",
+    "totalImpact": 123.8,
+    "impactPerMatch": 8.8,
+    "matches": 14,
+    "runs": 156,
+    "wickets": 0
+  },
+  {
+    "rank": 125,
+    "name": "Suryansh Shedge",
+    "team": "PBKS",
+    "totalImpact": 118.1,
+    "impactPerMatch": 16.8,
+    "matches": 7,
+    "runs": 158,
+    "wickets": 0
+  },
+  {
+    "rank": 126,
+    "name": "Azmatullah Omarzai",
+    "team": "PBKS",
+    "totalImpact": 117.5,
+    "impactPerMatch": 39.1,
+    "matches": 3,
+    "runs": 52,
+    "wickets": 3
+  },
+  {
+    "rank": 127,
+    "name": "Digvesh Rathi",
+    "team": "LSG",
+    "totalImpact": 113.7,
+    "impactPerMatch": 11.3,
+    "matches": 10,
+    "runs": 2,
+    "wickets": 5
+  },
+  {
+    "rank": 128,
+    "name": "Akash Singh",
+    "team": "LSG",
+    "totalImpact": 112.3,
+    "impactPerMatch": 56.1,
+    "matches": 2,
+    "runs": 0,
+    "wickets": 4
+  },
+  {
+    "rank": 129,
+    "name": "Gurjapneet Singh",
+    "team": "CSK",
+    "totalImpact": 104.8,
+    "impactPerMatch": 13.1,
+    "matches": 8,
+    "runs": 0,
+    "wickets": 4
+  },
+  {
+    "rank": 130,
+    "name": "Ashok Sharma",
+    "team": "GT",
+    "totalImpact": 102.8,
+    "impactPerMatch": 17.1,
+    "matches": 6,
+    "runs": 1,
+    "wickets": 6
+  },
+  {
+    "rank": 131,
+    "name": "Dewald Brevis",
+    "team": "CSK",
+    "totalImpact": 97.6,
+    "impactPerMatch": 8.8,
+    "matches": 11,
+    "runs": 151,
+    "wickets": 0
+  },
+  {
+    "rank": 132,
+    "name": "Khaleel Ahmed",
+    "team": "CSK",
+    "totalImpact": 94.6,
+    "impactPerMatch": 18.9,
+    "matches": 5,
+    "runs": 0,
+    "wickets": 2
+  },
+  {
+    "rank": 133,
+    "name": "Abdul Samad",
+    "team": "LSG",
+    "totalImpact": 92.2,
+    "impactPerMatch": 11.5,
+    "matches": 8,
+    "runs": 116,
+    "wickets": 0
+  },
+  {
+    "rank": 134,
+    "name": "Abishek Porel",
+    "team": "DC",
+    "totalImpact": 86.0,
+    "impactPerMatch": 21.5,
+    "matches": 4,
+    "runs": 108,
+    "wickets": 0
+  },
+  {
+    "rank": 135,
+    "name": "Ashwani Kumar",
+    "team": "MI",
+    "totalImpact": 83.7,
+    "impactPerMatch": 27.9,
+    "matches": 3,
+    "runs": 1,
+    "wickets": 6
+  },
+  {
+    "rank": 136,
+    "name": "Spencer Johnson",
+    "team": "CSK",
+    "totalImpact": 83.4,
+    "impactPerMatch": 27.8,
+    "matches": 3,
+    "runs": 0,
+    "wickets": 2
+  },
+  {
+    "rank": 137,
+    "name": "Trent Boult",
+    "team": "MI",
+    "totalImpact": 83.1,
+    "impactPerMatch": 16.6,
+    "matches": 5,
+    "runs": 8,
+    "wickets": 2
+  },
+  {
+    "rank": 138,
+    "name": "Sandeep Sharma",
+    "team": "RR",
+    "totalImpact": 75.6,
+    "impactPerMatch": 12.6,
+    "matches": 6,
+    "runs": 0,
+    "wickets": 5
+  },
+  {
+    "rank": 139,
+    "name": "Manish Pandey",
+    "team": "KKR",
+    "totalImpact": 74.4,
+    "impactPerMatch": 12.4,
+    "matches": 6,
+    "runs": 70,
+    "wickets": 0
+  },
+  {
+    "rank": 140,
+    "name": "Raghu Sharma",
+    "team": "MI",
+    "totalImpact": 65.8,
+    "impactPerMatch": 10.9,
+    "matches": 6,
+    "runs": 0,
+    "wickets": 1
+  },
+  {
+    "rank": 141,
+    "name": "Jaydev Unadkat",
+    "team": "SRH",
+    "totalImpact": 61.1,
+    "impactPerMatch": 15.2,
+    "matches": 4,
+    "runs": 4,
+    "wickets": 4
+  },
+  {
+    "rank": 142,
+    "name": "Nishant Sindhu",
+    "team": "GT",
+    "totalImpact": 59.7,
+    "impactPerMatch": 7.4,
+    "matches": 8,
+    "runs": 63,
+    "wickets": 0
+  },
+  {
+    "rank": 143,
+    "name": "Dasun Shanaka",
+    "team": "RR",
+    "totalImpact": 59.5,
+    "impactPerMatch": 8.5,
+    "matches": 7,
+    "runs": 63,
+    "wickets": 1
+  },
+  {
+    "rank": 144,
+    "name": "Shubham Dubey",
+    "team": "RR",
+    "totalImpact": 55.4,
+    "impactPerMatch": 7.9,
+    "matches": 7,
+    "runs": 81,
+    "wickets": 0
+  },
+  {
+    "rank": 145,
+    "name": "Aniket Verma",
+    "team": "SRH",
+    "totalImpact": 54.1,
+    "impactPerMatch": 5.4,
+    "matches": 10,
+    "runs": 79,
+    "wickets": 0
+  },
+  {
+    "rank": 146,
+    "name": "Harpreet Brar",
+    "team": "PBKS",
+    "totalImpact": 50.0,
+    "impactPerMatch": 25.0,
+    "matches": 2,
+    "runs": 5,
+    "wickets": 2
+  },
+  {
+    "rank": 147,
+    "name": "Jacob Bethell",
+    "team": "RCB",
+    "totalImpact": 49.6,
+    "impactPerMatch": 7.0,
+    "matches": 7,
+    "runs": 96,
+    "wickets": 0
+  },
+  {
+    "rank": 148,
+    "name": "George Linde",
+    "team": "LSG",
+    "totalImpact": 47.3,
+    "impactPerMatch": 15.7,
+    "matches": 3,
+    "runs": 31,
+    "wickets": 1
+  },
+  {
+    "rank": 149,
+    "name": "Sherfane Rutherford",
+    "team": "MI",
+    "totalImpact": 45.2,
+    "impactPerMatch": 5.6,
+    "matches": 8,
+    "runs": 123,
+    "wickets": 0
+  },
+  {
+    "rank": 150,
+    "name": "Himmat Singh",
+    "team": "LSG",
+    "totalImpact": 44.7,
+    "impactPerMatch": 7.4,
+    "matches": 6,
+    "runs": 92,
+    "wickets": 0
+  },
+  {
+    "rank": 151,
+    "name": "Sahil Parakh",
+    "team": "DC",
+    "totalImpact": 44.2,
+    "impactPerMatch": 11.0,
+    "matches": 4,
+    "runs": 46,
+    "wickets": 0
+  },
+  {
+    "rank": 152,
+    "name": "Jitesh Sharma",
+    "team": "RCB",
+    "totalImpact": 43.6,
+    "impactPerMatch": 2.7,
+    "matches": 16,
+    "runs": 116,
+    "wickets": 0
+  },
+  {
+    "rank": 153,
+    "name": "Blessing Muzarabani",
+    "team": "KKR",
+    "totalImpact": 42.9,
+    "impactPerMatch": 21.4,
+    "matches": 2,
+    "runs": 0,
+    "wickets": 4
+  },
+  {
+    "rank": 154,
+    "name": "Vipraj Nigam",
+    "team": "DC",
+    "totalImpact": 42.2,
+    "impactPerMatch": 8.4,
+    "matches": 5,
+    "runs": 15,
+    "wickets": 2
+  },
+  {
+    "rank": 155,
+    "name": "Kyle Jamieson",
+    "team": "DC",
+    "totalImpact": 42.0,
+    "impactPerMatch": 21.0,
+    "matches": 2,
+    "runs": 12,
+    "wickets": 2
+  },
+  {
+    "rank": 156,
+    "name": "Raj\u00a0Bawa",
+    "team": "MI",
+    "totalImpact": 40.6,
+    "impactPerMatch": 13.5,
+    "matches": 3,
+    "runs": 16,
+    "wickets": 2
+  },
+  {
+    "rank": 157,
+    "name": "Ramandeep Singh",
+    "team": "KKR",
+    "totalImpact": 36.6,
+    "impactPerMatch": 4.5,
+    "matches": 8,
+    "runs": 82,
+    "wickets": 1
+  },
+  {
+    "rank": 158,
+    "name": "Matt Henry",
+    "team": "CSK",
+    "totalImpact": 35.2,
+    "impactPerMatch": 11.7,
+    "matches": 3,
+    "runs": 7,
+    "wickets": 2
+  },
+  {
+    "rank": 159,
+    "name": "Ramakrishna Ghosh",
+    "team": "CSK",
+    "totalImpact": 35.1,
+    "impactPerMatch": 35.1,
+    "matches": 1,
+    "runs": 0,
+    "wickets": 1
+  },
+  {
+    "rank": 160,
+    "name": "Dilshan Madushanka",
+    "team": "SRH",
+    "totalImpact": 33.7,
+    "impactPerMatch": 33.7,
+    "matches": 1,
+    "runs": 0,
+    "wickets": 1
+  },
+  {
+    "rank": 161,
+    "name": "M Shahrukh Khan",
+    "team": "GT",
+    "totalImpact": 33.0,
+    "impactPerMatch": 3.6,
+    "matches": 9,
+    "runs": 43,
+    "wickets": 0
+  },
+  {
+    "rank": 162,
+    "name": "Manav Suthar",
+    "team": "GT",
+    "totalImpact": 32.5,
+    "impactPerMatch": 8.1,
+    "matches": 4,
+    "runs": 0,
+    "wickets": 2
+  },
+  {
+    "rank": 163,
+    "name": "Matthew Short",
+    "team": "CSK",
+    "totalImpact": 30.5,
+    "impactPerMatch": 10.1,
+    "matches": 3,
+    "runs": 60,
+    "wickets": 0
+  },
+  {
+    "rank": 164,
+    "name": "Auqib Nabi",
+    "team": "DC",
+    "totalImpact": 30.4,
+    "impactPerMatch": 6.0,
+    "matches": 5,
+    "runs": 14,
+    "wickets": 0
+  },
+  {
+    "rank": 165,
+    "name": "Sai Kishore",
+    "team": "GT",
+    "totalImpact": 29.9,
+    "impactPerMatch": 9.9,
+    "matches": 3,
+    "runs": 0,
+    "wickets": 1
+  },
+  {
+    "rank": 166,
+    "name": "Sushant Mishra",
+    "team": "RR",
+    "totalImpact": 27.4,
+    "impactPerMatch": 13.7,
+    "matches": 2,
+    "runs": 1,
+    "wickets": 2
+  },
+  {
+    "rank": 167,
+    "name": "Glenn Phillips",
+    "team": "GT",
+    "totalImpact": 27.3,
+    "impactPerMatch": 4.5,
+    "matches": 6,
+    "runs": 67,
+    "wickets": 0
+  },
+  {
+    "rank": 168,
+    "name": "Arjun Tendulkar",
+    "team": "LSG",
+    "totalImpact": 26.9,
+    "impactPerMatch": 26.9,
+    "matches": 1,
+    "runs": 5,
+    "wickets": 1
+  },
+  {
+    "rank": 169,
+    "name": "Shimron Hetmyer",
+    "team": "RR",
+    "totalImpact": 26.0,
+    "impactPerMatch": 3.2,
+    "matches": 8,
+    "runs": 78,
+    "wickets": 0
+  },
+  {
+    "rank": 170,
+    "name": "Yash Thakur",
+    "team": "PBKS",
+    "totalImpact": 21.7,
+    "impactPerMatch": 21.7,
+    "matches": 1,
+    "runs": 0,
+    "wickets": 2
+  },
+  {
+    "rank": 171,
+    "name": "Prashant Veer",
+    "team": "CSK",
+    "totalImpact": 15.8,
+    "impactPerMatch": 2.6,
+    "matches": 6,
+    "runs": 90,
+    "wickets": 0
+  },
+  {
+    "rank": 172,
+    "name": "Abhinandan Singh",
+    "team": "RCB",
+    "totalImpact": 15.6,
+    "impactPerMatch": 5.2,
+    "matches": 3,
+    "runs": 0,
+    "wickets": 3
+  },
+  {
+    "rank": 173,
+    "name": "David Payne",
+    "team": "SRH",
+    "totalImpact": 15.1,
+    "impactPerMatch": 7.5,
+    "matches": 2,
+    "runs": 6,
+    "wickets": 2
+  },
+  {
+    "rank": 174,
+    "name": "Harshal Patel",
+    "team": "SRH",
+    "totalImpact": 14.5,
+    "impactPerMatch": 2.9,
+    "matches": 5,
+    "runs": 10,
+    "wickets": 0
+  },
+  {
+    "rank": 175,
+    "name": "Tim Seifert",
+    "team": "KKR",
+    "totalImpact": 11.8,
+    "impactPerMatch": 3.9,
+    "matches": 3,
+    "runs": 19,
+    "wickets": 0
+  },
+  {
+    "rank": 176,
+    "name": "Lockie Ferguson",
+    "team": "PBKS",
+    "totalImpact": 10.4,
+    "impactPerMatch": 3.4,
+    "matches": 3,
+    "runs": 0,
+    "wickets": 1
+  },
+  {
+    "rank": 177,
+    "name": "Mayank Yadav",
+    "team": "LSG",
+    "totalImpact": 10.2,
+    "impactPerMatch": 2.5,
+    "matches": 4,
+    "runs": 5,
+    "wickets": 0
+  },
+  {
+    "rank": 178,
+    "name": "Vishnu Vinod",
+    "team": "PBKS",
+    "totalImpact": 10.0,
+    "impactPerMatch": 10.0,
+    "matches": 1,
+    "runs": 15,
+    "wickets": 0
+  },
+  {
+    "rank": 179,
+    "name": "Kumar Kushagra",
+    "team": "GT",
+    "totalImpact": 10.0,
+    "impactPerMatch": 10.0,
+    "matches": 1,
+    "runs": 18,
+    "wickets": 0
+  },
+  {
+    "rank": 180,
+    "name": "Karun Nair",
+    "team": "DC",
+    "totalImpact": 9.5,
+    "impactPerMatch": 4.7,
+    "matches": 2,
+    "runs": 18,
+    "wickets": 0
+  },
+  {
+    "rank": 181,
+    "name": "Ben Dwarshuis",
+    "team": "PBKS",
+    "totalImpact": 9.3,
+    "impactPerMatch": 9.3,
+    "matches": 1,
+    "runs": 0,
+    "wickets": 1
+  },
+  {
+    "rank": 182,
+    "name": "Matheesha Pathirana",
+    "team": "KKR",
+    "totalImpact": 8.7,
+    "impactPerMatch": 8.7,
+    "matches": 1,
+    "runs": 0,
+    "wickets": 0
+  },
+  {
+    "rank": 183,
+    "name": "Rahul Chahar",
+    "team": "CSK",
+    "totalImpact": 4.9,
+    "impactPerMatch": 4.9,
+    "matches": 1,
+    "runs": 0,
+    "wickets": 0
+  },
+  {
+    "rank": 184,
+    "name": "Ravi Singh",
+    "team": "RR",
+    "totalImpact": 4.7,
+    "impactPerMatch": 4.7,
+    "matches": 1,
+    "runs": 4,
+    "wickets": 0
+  },
+  {
+    "rank": 185,
+    "name": "Robin Minz",
+    "team": "MI",
+    "totalImpact": 3.9,
+    "impactPerMatch": 1.9,
+    "matches": 2,
+    "runs": 6,
+    "wickets": 0
+  },
+  {
+    "rank": 186,
+    "name": "Akshat Raghuwanshi",
+    "team": "LSG",
+    "totalImpact": 3.8,
+    "impactPerMatch": 1.2,
+    "matches": 3,
+    "runs": 29,
+    "wickets": 0
+  },
+  {
+    "rank": 187,
+    "name": "Tejasvi Dahiya",
+    "team": "KKR",
+    "totalImpact": 1.8,
+    "impactPerMatch": 0.9,
+    "matches": 2,
+    "runs": 12,
+    "wickets": 0
+  },
+  {
+    "rank": 188,
+    "name": "Nehal Wadhera",
+    "team": "PBKS",
+    "totalImpact": 1.5,
+    "impactPerMatch": 0.1,
+    "matches": 8,
+    "runs": 65,
+    "wickets": 0
+  },
+  {
+    "rank": 189,
+    "name": "Mayank Rawat",
+    "team": "MI",
+    "totalImpact": 0.0,
+    "impactPerMatch": 0.0,
+    "matches": 1,
+    "runs": 0,
+    "wickets": 0
+  },
+  {
+    "rank": 190,
+    "name": "Adam Milne",
+    "team": "RR",
+    "totalImpact": -1.5,
+    "impactPerMatch": -1.5,
+    "matches": 1,
+    "runs": 2,
+    "wickets": 0
+  },
+  {
+    "rank": 191,
+    "name": "Lhuan-dre Pretorius",
+    "team": "RR",
+    "totalImpact": -2.1,
+    "impactPerMatch": -1.1,
+    "matches": 2,
+    "runs": 7,
+    "wickets": 0
+  },
+  {
+    "rank": 192,
+    "name": "Kulwant Khejroliya",
+    "team": "GT",
+    "totalImpact": -3.1,
+    "impactPerMatch": -3.1,
+    "matches": 1,
+    "runs": 0,
+    "wickets": 0
+  },
+  {
+    "rank": 193,
+    "name": "Dushmantha Chameera",
+    "team": "DC",
+    "totalImpact": -3.8,
+    "impactPerMatch": -3.8,
+    "matches": 1,
+    "runs": 0,
+    "wickets": 0
+  },
+  {
+    "rank": 194,
+    "name": "Danish Malewar",
+    "team": "MI",
+    "totalImpact": -5.2,
+    "impactPerMatch": -2.6,
+    "matches": 2,
+    "runs": 2,
+    "wickets": 0
+  },
+  {
+    "rank": 195,
+    "name": "Ravichandran Smaran",
+    "team": "SRH",
+    "totalImpact": -6.5,
+    "impactPerMatch": -1.1,
+    "matches": 6,
+    "runs": 19,
+    "wickets": 0
+  },
+  {
+    "rank": 196,
+    "name": "Anrich Nortje",
+    "team": "LSG",
+    "totalImpact": -6.9,
+    "impactPerMatch": -6.9,
+    "matches": 1,
+    "runs": 0,
+    "wickets": 0
+  },
+  {
+    "rank": 197,
+    "name": "Navdeep Saini",
+    "team": "KKR",
+    "totalImpact": -9.5,
+    "impactPerMatch": -4.8,
+    "matches": 2,
+    "runs": 0,
+    "wickets": 0
+  },
+  {
+    "rank": 198,
+    "name": "Liam Livingstone",
+    "team": "SRH",
+    "totalImpact": -10.8,
+    "impactPerMatch": -5.4,
+    "matches": 2,
+    "runs": 15,
+    "wickets": 0
+  },
+  {
+    "rank": 199,
+    "name": "Tripurana Vijay",
+    "team": "DC",
+    "totalImpact": -11.1,
+    "impactPerMatch": -11.1,
+    "matches": 1,
+    "runs": 0,
+    "wickets": 0
+  },
+  {
+    "rank": 200,
+    "name": "Krish Bhagat",
+    "team": "MI",
+    "totalImpact": -16.4,
+    "impactPerMatch": -5.5,
+    "matches": 3,
+    "runs": 10,
+    "wickets": 0
+  },
+  {
+    "rank": 201,
+    "name": "Mayank Markande",
+    "team": "MI",
+    "totalImpact": -25.9,
+    "impactPerMatch": -8.7,
+    "matches": 3,
+    "runs": 0,
+    "wickets": 0
+  },
+  {
+    "rank": 202,
+    "name": "Arshin Kulkarni",
+    "team": "LSG",
+    "totalImpact": -31.6,
+    "impactPerMatch": -15.8,
+    "matches": 2,
+    "runs": 17,
+    "wickets": 0
+  }
+]
