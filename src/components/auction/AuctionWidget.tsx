@@ -18,8 +18,10 @@ import {
   Radio,
   Users,
   TrendingUp,
-  Gavel
+  Gavel,
+  Search
 } from "lucide-react";
+import { DEFAULT_ROSTERS } from "@/lib/presetData";
 
 interface AuctionWidgetProps {
   auctionState: LiveAuctionState;
@@ -66,6 +68,65 @@ function PlayerInitialAvatar({ name, role, size = 32 }: { name: string; role?: s
       }}
     >
       {initials}
+    </div>
+  );
+}
+
+function PlayerListView({ isDark }: { isDark: boolean }) {
+  const [searchTerm, setSearchTerm] = useState("");
+  const playerPool = DEFAULT_ROSTERS.find(r => r.id === "roster_ipl_2026_master")?.players || DEFAULT_ROSTERS[0].players;
+  const filteredPlayers = playerPool.filter(p => p.name.toLowerCase().includes(searchTerm.toLowerCase()));
+
+  return (
+    <div className="flex flex-col h-full max-h-[60vh] md:max-h-[70vh]">
+      <div className="px-4 py-3 border-b" style={{ borderColor: isDark ? "#2A344A" : "#E5E7EB" }}>
+        <div className="relative">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 w-4 h-4 text-slate-400" />
+          <input
+            type="text"
+            placeholder="Search players..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className="w-full pl-9 pr-4 py-2 rounded-xl text-sm outline-none transition-all"
+            style={{
+              background: isDark ? "#111827" : "#F3F4F6",
+              color: isDark ? "#F9FAFB" : "#111827",
+              border: `1px solid ${isDark ? "#374151" : "#D1D5DB"}`
+            }}
+          />
+        </div>
+      </div>
+      <div className="flex-1 overflow-y-auto custom-scrollbar p-2">
+        {filteredPlayers.length > 0 ? (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-2">
+            {filteredPlayers.slice(0, 100).map((p) => (
+              <div key={p.id} className="flex items-center gap-3 p-3 rounded-xl hover:bg-black/5 dark:hover:bg-white/5 transition-colors border" style={{ borderColor: isDark ? "#1F2937" : "#F3F4F6" }}>
+                <PlayerInitialAvatar name={p.name} role={p.role} size={36} />
+                <div className="flex-1 min-w-0">
+                  <p className="text-sm font-bold truncate" style={{ color: isDark ? "#F9FAFB" : "#111827" }}>{p.name}</p>
+                  <p className="text-[10px] font-semibold opacity-70 flex items-center gap-1.5 mt-0.5" style={{ color: isDark ? "#9CA3AF" : "#6B7280" }}>
+                    <span style={{ color: ROLE_COLORS[p.role] || "#888" }}>{p.role}</span>
+                    <span>•</span>
+                    <span>{p.nationality}</span>
+                    {p.isCapped && <span>• Capped</span>}
+                  </p>
+                </div>
+                <div className="text-right shrink-0">
+                  <p className="text-[10px] uppercase tracking-wider font-bold opacity-60" style={{ color: isDark ? "#9CA3AF" : "#6B7280" }}>Base</p>
+                  <p className="text-sm font-black font-mono mt-0.5" style={{ color: isDark ? "#FCD34D" : "#D97706" }}>{formatCurrencyCr(p.basePrice)}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        ) : (
+          <div className="p-8 text-center text-slate-500 text-sm font-bold">No players found matching "{searchTerm}"</div>
+        )}
+        {filteredPlayers.length > 100 && (
+          <div className="text-center p-4 text-xs font-bold opacity-50" style={{ color: isDark ? "#9CA3AF" : "#6B7280" }}>
+            Showing top 100 results. Use search to find more players.
+          </div>
+        )}
+      </div>
     </div>
   );
 }
@@ -304,13 +365,10 @@ export default function AuctionWidget({
         )}
 
         {activeTab === "players" && (
-          <div className="flex-1 flex flex-col items-center justify-center p-10 text-center max-w-6xl mx-auto w-full">
-            <div className="w-20 h-20 rounded-3xl bg-blue-500/10 flex items-center justify-center mb-6 border border-blue-500/20 shadow-inner">
-              <Users className="w-10 h-10 text-blue-500" />
+          <div className="flex-1 max-w-6xl mx-auto w-full p-4 md:p-10">
+            <div style={{ background: surfaceBg, border: `1px solid ${borderColor}` }} className="rounded-2xl overflow-hidden shadow-sm h-full">
+              <PlayerListView isDark={isDark} />
             </div>
-            <h2 className="text-2xl font-black mb-2" style={{ color: textPrimary }}>Player Pool</h2>
-            <p className="text-sm max-w-md mb-8" style={{ color: textSecondary }}>The complete list of players, sets, and unsold players is managed in the Auctioneer Console.</p>
-            {onOpenConsole && <button onClick={onOpenConsole} className="px-8 py-3 rounded-xl text-sm font-bold shadow-lg hover:-translate-y-0.5 transition-all" style={{ background: "#2563EB", color: "#fff" }}>Open Console</button>}
           </div>
         )}
 
@@ -644,12 +702,7 @@ export default function AuctionWidget({
       )}
 
       {activeTab === "players" && (
-        <div className="px-4 py-4 text-center text-sm" style={{ color: textSecondary }}>
-          <Users className="w-8 h-8 mx-auto mb-2 opacity-30" />
-          <p className="font-semibold">Player list view</p>
-          <p className="text-xs">Open Auctioneer Console to manage the full player pool</p>
-          {onOpenConsole && <button onClick={onOpenConsole} className="mt-3 px-4 py-2 rounded-lg text-xs font-bold" style={{ background: "#2563EB", color: "#fff" }}>Open Console</button>}
-        </div>
+        <PlayerListView isDark={isDark} />
       )}
 
       {activeTab === "rules" && (
