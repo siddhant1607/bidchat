@@ -18,6 +18,7 @@ import {
   Radio,
   Users,
   TrendingUp,
+  Gavel
 } from "lucide-react";
 
 interface AuctionWidgetProps {
@@ -166,107 +167,205 @@ export default function AuctionWidget({
           </div>
         </div>
 
-        <div className="flex-1 p-3 md:p-10 max-w-6xl mx-auto w-full space-y-3 md:space-y-6">
-          {/* Player Card */}
-          <div style={{ background: surfaceBg, border: `1px solid ${borderColor}` }} className="rounded-2xl p-4 md:p-6">
-            <div className="flex items-center justify-between gap-3">
-              <div className="flex items-center gap-3 md:gap-5 min-w-0">
-                {currentPlayer && <PlayerInitialAvatar name={currentPlayer.name} role={currentPlayer.role} size={48} />}
-                <div className="min-w-0">
-                  <p className="text-[10px] font-bold uppercase tracking-widest mb-0.5" style={{ color: textSecondary }}>On The Block</p>
-                  <h2 className="text-xl md:text-4xl font-black tracking-tight leading-tight truncate" style={{ color: textPrimary }}>{currentPlayer?.name || "CALLING NEXT PLAYER"}</h2>
-                  <div className="flex flex-wrap items-center gap-1.5 mt-1.5">
-                    {currentPlayer?.role && <span className="px-2 py-0.5 rounded-md text-[10px] font-bold" style={{ background: (ROLE_COLORS[currentPlayer.role] || "#888") + "22", color: ROLE_COLORS[currentPlayer.role] || "#888" }}>{currentPlayer.role}</span>}
-                    {currentPlayer?.nationality && <span className="px-2 py-0.5 rounded-md text-[10px] font-bold" style={{ background: isDark ? "#1E3A5F" : "#DBEAFE", color: isDark ? "#93C5FD" : "#1D4ED8" }}>{currentPlayer.nationality}</span>}
-                    {currentPlayer && <span className="px-2 py-0.5 rounded-md text-[10px] font-bold" style={{ background: isDark ? "#2A2000" : "#FEF9C3", color: isDark ? "#FCD34D" : "#854D0E" }}>Base: {formatCurrencyCr(currentPlayer.basePrice)}</span>}
+        {/* ── TAB BAR (Full Screen) ── */}
+        <div style={{ borderBottom: `1px solid ${borderColor}`, background: isDark ? "#111" : "#FAFAFA" }} className="flex justify-center">
+          <div className="flex items-center gap-2 md:gap-8 px-4 overflow-x-auto scrollbar-none max-w-6xl w-full">
+            {(["live", "players", "rules", "stats"] as const).map((tab) => (
+              <button
+                key={tab}
+                onClick={() => setActiveTab(tab)}
+                style={{
+                  color: activeTab === tab ? "#2563EB" : textSecondary,
+                  borderBottom: activeTab === tab ? "2px solid #2563EB" : "2px solid transparent",
+                  paddingBottom: 12,
+                  paddingTop: 12,
+                  paddingLeft: 16,
+                  paddingRight: 16,
+                  fontSize: 13,
+                  fontWeight: 800,
+                  textTransform: "uppercase",
+                  letterSpacing: "0.05em",
+                  whiteSpace: "nowrap",
+                  transition: "all 0.2s",
+                }}
+              >{tab === "live" ? "🔴 Live Arena" : tab}</button>
+            ))}
+          </div>
+        </div>
+
+        {activeTab === "live" && (
+          <div className="flex-1 p-3 md:p-10 max-w-6xl mx-auto w-full space-y-3 md:space-y-6">
+            {/* Player Card */}
+            <div style={{ background: surfaceBg, border: `1px solid ${borderColor}` }} className="rounded-2xl p-4 md:p-6 shadow-sm">
+              <div className="flex items-center justify-between gap-3">
+                <div className="flex items-center gap-3 md:gap-5 min-w-0">
+                  {currentPlayer && <PlayerInitialAvatar name={currentPlayer.name} role={currentPlayer.role} size={56} />}
+                  <div className="min-w-0">
+                    <p className="text-[10px] font-bold uppercase tracking-widest mb-0.5" style={{ color: textSecondary }}>On The Block</p>
+                    <h2 className="text-xl md:text-4xl font-black tracking-tight leading-tight truncate" style={{ color: textPrimary }}>{currentPlayer?.name || "CALLING NEXT PLAYER"}</h2>
+                    <div className="flex flex-wrap items-center gap-1.5 mt-1.5">
+                      {currentPlayer?.role && <span className="px-2 py-0.5 rounded-md text-[10px] font-bold" style={{ background: (ROLE_COLORS[currentPlayer.role] || "#888") + "22", color: ROLE_COLORS[currentPlayer.role] || "#888" }}>{currentPlayer.role}</span>}
+                      {currentPlayer?.nationality && <span className="px-2 py-0.5 rounded-md text-[10px] font-bold" style={{ background: isDark ? "#1E3A5F" : "#DBEAFE", color: isDark ? "#1D4ED8" : "#1D4ED8" }}>{currentPlayer.nationality}</span>}
+                      {currentPlayer && <span className="px-2 py-0.5 rounded-md text-[10px] font-bold" style={{ background: isDark ? "#2A2000" : "#FEF9C3", color: isDark ? "#FCD34D" : "#854D0E" }}>Base: {formatCurrencyCr(currentPlayer.basePrice)}</span>}
+                    </div>
+                  </div>
+                </div>
+                <div className="text-right flex-shrink-0">
+                  <p className="text-[9px] font-bold uppercase tracking-widest" style={{ color: textSecondary }}>TIME LEFT</p>
+                  <p className={`text-4xl md:text-5xl font-black font-mono mt-0.5 ${timerSeconds <= 5 ? "text-red-500 animate-pulse" : "text-amber-400"}`}>
+                    00:{timerSeconds < 10 ? `0${timerSeconds}` : timerSeconds}
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Bid Panel */}
+              <div className="space-y-4">
+                <div style={{ backgroundColor: leadingTeam?.primaryColor || "#1A1A1A", borderRadius: 16 }} className="p-5 flex items-center justify-between shadow-lg">
+                  <div>
+                    <p className="text-xs font-bold uppercase tracking-widest opacity-70" style={{ color: theme.onPrimary }}>CURRENT BID</p>
+                    <p className="text-4xl md:text-5xl font-black mt-1" style={{ color: theme.onPrimary }}>{formatCurrencyCr(currentBid)}</p>
+                  </div>
+                  <div className="text-right">
+                    <p className="text-xs font-bold uppercase tracking-widest opacity-70" style={{ color: theme.onPrimary }}>LEADER</p>
+                    <p className="text-xl md:text-2xl font-black mt-1" style={{ color: theme.onPrimary }}>{leadingTeam?.name || "No bids yet"}</p>
+                  </div>
+                </div>
+                <div className="flex gap-3">
+                  <button disabled={Boolean(isUserLeading) || !currentPlayer} onClick={() => onPlaceBid(Number((currentBid + (increments[0]?.amountCr || 0.25)).toFixed(2)))} className={`flex-1 py-4 md:py-5 rounded-xl font-black text-sm md:text-base transition-all active:scale-95 shadow-md ${isUserLeading ? "cursor-not-allowed opacity-60" : "hover:brightness-110"}`} style={{ background: isUserLeading ? (isDark ? "#2A2A2A" : "#E4E4E7") : "#2563EB", color: isUserLeading ? textSecondary : "#FFFFFF" }}>
+                    {isUserLeading ? "✓ YOU ARE LEADING" : `🔨 RAISE PADDLE · ${formatCurrencyCr(Number((currentBid + (increments[0]?.amountCr || 0.25)).toFixed(2)))}`}
+                  </button>
+                  <button onClick={onPass} style={{ background: surfaceBg, color: textPrimary, border: `1px solid ${borderColor}` }} className="px-6 md:px-8 rounded-xl font-bold text-sm md:text-base hover:bg-red-500/10 hover:text-red-500 hover:border-red-500/50 transition-all">PASS</button>
+                </div>
+                {settings?.allowCustomBids && (
+                  <div className="grid grid-cols-3 gap-2">
+                    {increments.slice(1).map((inc) => (
+                      <button key={inc.label} disabled={Boolean(isUserLeading)} onClick={() => onPlaceBid(Number((currentBid + inc.amountCr).toFixed(2)))} style={{ background: isDark ? "#222" : "#F4F4F5", color: textPrimary, border: `1px solid ${borderColor}` }} className="py-2.5 rounded-xl text-xs font-bold hover:bg-blue-500/10 hover:text-blue-500 transition-all">{inc.label}</button>
+                    ))}
+                    <button onClick={() => setShowCustomInput(!showCustomInput)} style={{ background: "transparent", border: `1px dashed ${borderColor}`, color: textSecondary }} className="py-2.5 rounded-xl text-xs font-bold hover:opacity-80">Custom ▾</button>
+                  </div>
+                )}
+                {showCustomInput && (
+                  <div className="flex gap-2">
+                    <input type="number" step="0.05" placeholder="Amount in Cr" value={customBid} onChange={(e) => setCustomBid(e.target.value)} style={{ background: surfaceBg, border: `1px solid ${borderColor}`, color: textPrimary }} className="flex-1 text-sm rounded-xl px-3 py-2.5 outline-none font-mono font-bold" />
+                    <button onClick={() => { const v = parseFloat(customBid); if (v > currentBid) { onPlaceBid(v); setCustomBid(""); setShowCustomInput(false); } }} className="px-5 rounded-xl bg-emerald-600 hover:bg-emerald-500 text-white font-black text-sm transition-colors">BID</button>
+                  </div>
+                )}
+              </div>
+
+              {/* Bid History */}
+              <div style={{ background: surfaceBg, border: `1px solid ${borderColor}` }} className="rounded-2xl overflow-hidden flex flex-col h-[340px] shadow-sm">
+                <div className="px-5 py-4" style={{ borderBottom: `1px solid ${borderColor}`, background: isDark ? "#111" : "#F9F9F9" }}>
+                  <p className="text-xs font-black uppercase tracking-widest" style={{ color: textSecondary }}>BID HISTORY</p>
+                </div>
+                <div style={{ background: tableBg }} className="flex-1 overflow-hidden flex flex-col">
+                  <div className="grid grid-cols-[36px_1fr_auto_auto] gap-x-3 px-5 py-2.5" style={{ borderBottom: `1px solid ${borderColor}` }}>
+                    {["#", "FRANCHISE", "AMOUNT", "TIME"].map(h => <span key={h} className="text-[10px] font-black uppercase tracking-wider" style={{ color: textSecondary }}>{h}</span>)}
+                  </div>
+                  <div className="flex-1 overflow-y-auto custom-scrollbar">
+                    {auctionState.bidHistory.length > 0 ? auctionState.bidHistory.slice().reverse().map((bid, idx, arr) => (
+                      <div key={bid.id} style={{ background: idx === 0 ? tableRowHighlight : "transparent", borderBottom: `1px solid ${borderColor}` }} className="grid grid-cols-[36px_1fr_auto_auto] gap-x-3 px-5 py-3.5 items-center hover:bg-black/5 dark:hover:bg-white/5 transition-colors">
+                        <span className="text-sm font-black" style={{ color: idx === 0 ? "#F59E0B" : textSecondary }}>{arr.length - idx}</span>
+                        <div className="flex items-center gap-3">
+                          <div style={{ width: 28, height: 28, borderRadius: "50%", background: "#2563EB22", border: "1.5px solid #2563EB55", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 10, fontWeight: 800, color: "#3B82F6" }}>{bid.teamShortName.slice(0, 2)}</div>
+                          <span className="text-sm font-bold" style={{ color: textPrimary }}>{bid.teamShortName}</span>
+                        </div>
+                        <span className="text-sm font-black font-mono" style={{ color: idx === 0 ? "#F59E0B" : textPrimary }}>{formatCurrencyCr(bid.amount)}</span>
+                        <span className="text-xs" style={{ color: textSecondary }}>{idx === 0 ? "Now" : bid.timestamp}</span>
+                      </div>
+                    )) : (
+                      <div className="py-12 flex flex-col items-center justify-center text-center px-4">
+                        <div className="w-12 h-12 rounded-full bg-slate-100 dark:bg-slate-800 flex items-center justify-center mb-3"><Gavel className="w-5 h-5 text-slate-400" /></div>
+                        <p className="text-sm font-bold" style={{ color: textSecondary }}>No bids yet</p>
+                        <p className="text-xs mt-1" style={{ color: textSecondary, opacity: 0.7 }}>Be the first to raise the paddle!</p>
+                      </div>
+                    )}
                   </div>
                 </div>
               </div>
-              <div className="text-right flex-shrink-0">
-                <p className="text-[9px] font-bold uppercase tracking-widest" style={{ color: textSecondary }}>TIME LEFT</p>
-                <p className={`text-3xl md:text-5xl font-black font-mono mt-0.5 ${timerSeconds <= 5 ? "text-red-500 animate-pulse" : "text-amber-400"}`}>
-                  00:{timerSeconds < 10 ? `0${timerSeconds}` : timerSeconds}
-                </p>
+            </div>
+
+            {/* Franchise Tracker */}
+            <div style={{ background: surfaceBg, border: `1px solid ${borderColor}` }} className="rounded-2xl overflow-hidden mt-6 shadow-sm">
+              <div className="px-5 py-4" style={{ borderBottom: `1px solid ${borderColor}`, background: isDark ? "#111" : "#F9F9F9" }}>
+                <p className="text-xs font-black uppercase tracking-widest" style={{ color: textSecondary }}>ALL FRANCHISES — LIVE PURSE</p>
+              </div>
+              <div className="p-5 grid grid-cols-2 md:grid-cols-4 gap-4">
+                {allTeams.map(t => (
+                  <div key={t.shortName} className="flex items-center justify-between p-3 rounded-xl" style={{ border: `1px solid ${borderColor}`, background: tableBg }}>
+                    <span className="text-sm font-bold" style={{ color: textPrimary }}>{t.shortName}</span>
+                    <span className="text-sm font-black font-mono" style={{ color: "#10B981" }}>{formatCurrencyCr(t.purseRemaining)}</span>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
+        )}
 
-          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-            {/* Bid Panel */}
-            <div className="space-y-4">
-              <div style={{ backgroundColor: leadingTeam?.primaryColor || "#1A1A1A", borderRadius: 16 }} className="p-5 flex items-center justify-between">
-                <div>
-                  <p className="text-xs font-bold uppercase tracking-widest opacity-70" style={{ color: theme.onPrimary }}>CURRENT BID</p>
-                  <p className="text-4xl font-black mt-1" style={{ color: theme.onPrimary }}>{formatCurrencyCr(currentBid)}</p>
-                </div>
-                <div className="text-right">
-                  <p className="text-xs font-bold uppercase tracking-widest opacity-70" style={{ color: theme.onPrimary }}>LEADER</p>
-                  <p className="text-xl font-black mt-1" style={{ color: theme.onPrimary }}>{leadingTeam?.name || "No bids yet"}</p>
-                </div>
-              </div>
-              <div className="flex gap-3">
-                <button disabled={Boolean(isUserLeading) || !currentPlayer} onClick={() => onPlaceBid(Number((currentBid + (increments[0]?.amountCr || 0.25)).toFixed(2)))} className={`flex-1 py-4 rounded-xl font-black text-sm transition-all active:scale-98 ${isUserLeading ? "cursor-not-allowed opacity-60" : ""}`} style={{ background: isUserLeading ? (isDark ? "#2A2A2A" : "#E4E4E7") : "#2563EB", color: isUserLeading ? textSecondary : "#FFFFFF" }}>
-                  {isUserLeading ? "✓ YOU ARE LEADING" : `🔨 RAISE PADDLE · ${formatCurrencyCr(Number((currentBid + (increments[0]?.amountCr || 0.25)).toFixed(2)))}`}
-                </button>
-                <button onClick={onPass} style={{ background: surfaceBg, color: textPrimary, border: `1px solid ${borderColor}` }} className="px-6 rounded-xl font-bold text-sm hover:opacity-80 transition-all">PASS</button>
-              </div>
-              {settings?.allowCustomBids && (
-                <div className="grid grid-cols-3 gap-2">
-                  {increments.slice(1).map((inc) => (
-                    <button key={inc.label} disabled={Boolean(isUserLeading)} onClick={() => onPlaceBid(Number((currentBid + inc.amountCr).toFixed(2)))} style={{ background: isDark ? "#222" : "#F4F4F5", color: textPrimary, border: `1px solid ${borderColor}` }} className="py-2.5 rounded-xl text-xs font-bold hover:opacity-80 transition-all">{inc.label}</button>
-                  ))}
-                  <button onClick={() => setShowCustomInput(!showCustomInput)} style={{ background: "transparent", border: `1px dashed ${borderColor}`, color: textSecondary }} className="py-2.5 rounded-xl text-xs font-bold hover:opacity-80">Custom ▾</button>
-                </div>
-              )}
-              {showCustomInput && (
-                <div className="flex gap-2">
-                  <input type="number" step="0.05" placeholder="Amount in Cr" value={customBid} onChange={(e) => setCustomBid(e.target.value)} style={{ background: surfaceBg, border: `1px solid ${borderColor}`, color: textPrimary }} className="flex-1 text-sm rounded-xl px-3 py-2.5 outline-none" />
-                  <button onClick={() => { const v = parseFloat(customBid); if (v > currentBid) { onPlaceBid(v); setCustomBid(""); setShowCustomInput(false); } }} className="px-5 rounded-xl bg-emerald-600 hover:bg-emerald-700 text-white font-black text-sm">BID</button>
-                </div>
-              )}
+        {activeTab === "players" && (
+          <div className="flex-1 flex flex-col items-center justify-center p-10 text-center max-w-6xl mx-auto w-full">
+            <div className="w-20 h-20 rounded-3xl bg-blue-500/10 flex items-center justify-center mb-6 border border-blue-500/20 shadow-inner">
+              <Users className="w-10 h-10 text-blue-500" />
             </div>
+            <h2 className="text-2xl font-black mb-2" style={{ color: textPrimary }}>Player Pool</h2>
+            <p className="text-sm max-w-md mb-8" style={{ color: textSecondary }}>The complete list of players, sets, and unsold players is managed in the Auctioneer Console.</p>
+            {onOpenConsole && <button onClick={onOpenConsole} className="px-8 py-3 rounded-xl text-sm font-bold shadow-lg hover:-translate-y-0.5 transition-all" style={{ background: "#2563EB", color: "#fff" }}>Open Console</button>}
+          </div>
+        )}
 
-            {/* Bid History */}
-            <div style={{ background: surfaceBg, border: `1px solid ${borderColor}` }} className="rounded-2xl overflow-hidden">
-              <div className="px-4 py-3" style={{ borderBottom: `1px solid ${borderColor}` }}>
-                <p className="text-xs font-black uppercase tracking-widest" style={{ color: textSecondary }}>BID HISTORY</p>
+        {activeTab === "rules" && (
+          <div className="flex-1 p-6 md:p-10 max-w-3xl mx-auto w-full">
+            <div style={{ background: surfaceBg, border: `1px solid ${borderColor}` }} className="rounded-2xl overflow-hidden shadow-sm">
+              <div className="px-6 py-5" style={{ borderBottom: `1px solid ${borderColor}`, background: isDark ? "#111" : "#F9F9F9" }}>
+                <p className="text-xs font-black uppercase tracking-widest" style={{ color: textSecondary }}>Active Tournament Rules</p>
               </div>
-              <div style={{ background: tableBg }}>
-                <div className="grid grid-cols-[28px_1fr_auto_auto] gap-x-3 px-4 py-2" style={{ borderBottom: `1px solid ${borderColor}` }}>
-                  {["#", "FRANCHISE", "AMOUNT", "TIME"].map(h => <span key={h} className="text-[10px] font-black uppercase tracking-wider" style={{ color: textSecondary }}>{h}</span>)}
-                </div>
-                <div className="max-h-48 overflow-y-auto">
-                  {auctionState.bidHistory.length > 0 ? auctionState.bidHistory.slice().reverse().map((bid, idx, arr) => (
-                    <div key={bid.id} style={{ background: idx === 0 ? tableRowHighlight : "transparent", borderBottom: `1px solid ${borderColor}` }} className="grid grid-cols-[28px_1fr_auto_auto] gap-x-3 px-4 py-2.5 items-center">
-                      <span className="text-xs font-black" style={{ color: idx === 0 ? "#F59E0B" : textSecondary }}>{arr.length - idx}</span>
-                      <div className="flex items-center gap-2">
-                        <div style={{ width: 24, height: 24, borderRadius: "50%", background: "#2563EB22", border: "1.5px solid #2563EB55", display: "flex", alignItems: "center", justifyContent: "center", fontSize: 9, fontWeight: 800, color: "#3B82F6" }}>{bid.teamShortName.slice(0, 2)}</div>
-                        <span className="text-xs font-bold" style={{ color: textPrimary }}>{bid.teamShortName}</span>
+              <div className="p-2">
+                {[
+                  { label: "Bid Style", value: settings?.allowCustomBids ? "Custom Free Bids" : "IPL Fixed Paddle" },
+                  { label: "Jump Bids", value: settings?.allowJumpBids ? "Allowed" : "Not Allowed" },
+                  { label: "Right To Match (RTM)", value: "Per 2025 IPL Rules" },
+                  { label: "Accelerated Rounds", value: settings?.acceleratedRounds ?? 2 },
+                  { label: "Unsold Discount", value: settings?.allowUnsoldDiscount ? `${settings.unsoldDiscountPercentage ?? 50}%` : "Off" },
+                  { label: "Points System", value: settings?.pointSystem === "none" ? "Disabled" : settings?.pointSystem === "custom" ? "Custom" : "ESPN MVP" },
+                ].map(({ label, value }) => (
+                  <div key={label} className="flex items-center justify-between p-4 rounded-xl m-2" style={{ background: tableBg }}>
+                    <span className="text-sm font-bold" style={{ color: textSecondary }}>{label}</span>
+                    <span className="text-sm font-black" style={{ color: textPrimary }}>{value}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {activeTab === "stats" && (
+          <div className="flex-1 p-6 md:p-10 max-w-4xl mx-auto w-full">
+            <div style={{ background: surfaceBg, border: `1px solid ${borderColor}` }} className="rounded-2xl overflow-hidden shadow-sm">
+              <div className="px-6 py-5 flex items-center justify-between" style={{ borderBottom: `1px solid ${borderColor}`, background: isDark ? "#111" : "#F9F9F9" }}>
+                <p className="text-xs font-black uppercase tracking-widest" style={{ color: textSecondary }}>Franchise Overview</p>
+                {(onOpenAnalytics || onOpenDashboard) && <button onClick={onOpenAnalytics || onOpenDashboard} className="px-4 py-1.5 rounded-lg text-xs font-bold transition-colors hover:opacity-90" style={{ background: "#2563EB", color: "#fff" }}>Full Dashboard</button>}
+              </div>
+              <div className="p-2">
+                {allTeams.map(t => (
+                  <div key={t.shortName} className="flex items-center justify-between p-4 rounded-xl m-2" style={{ background: tableBg }}>
+                    <div className="flex items-center gap-4">
+                      <div className="w-10 h-10 rounded-full flex items-center justify-center font-black text-sm" style={{ background: t.primaryColor, color: "#fff" }}>{t.shortName}</div>
+                      <div>
+                        <span className="text-sm font-black block" style={{ color: textPrimary }}>{t.name}</span>
+                        <span className="text-xs font-bold opacity-60" style={{ color: textSecondary }}>Squad: {t.squadCount}/25 • Overseas: {t.overseasCount}/8</span>
                       </div>
-                      <span className="text-xs font-black font-mono" style={{ color: idx === 0 ? "#F59E0B" : textPrimary }}>{formatCurrencyCr(bid.amount)}</span>
-                      <span className="text-[10px]" style={{ color: textSecondary }}>{idx === 0 ? "Now" : bid.timestamp}</span>
                     </div>
-                  )) : (
-                    <div className="py-6 text-center text-xs" style={{ color: textSecondary }}>No bids yet. Be the first to raise the paddle!</div>
-                  )}
-                </div>
+                    <div className="text-right">
+                      <span className="text-xs font-bold uppercase tracking-widest opacity-60 block mb-1" style={{ color: textSecondary }}>Purse Left</span>
+                      <span className="text-lg font-black font-mono" style={{ color: "#10B981" }}>{formatCurrencyCr(t.purseRemaining)}</span>
+                    </div>
+                  </div>
+                ))}
               </div>
             </div>
           </div>
-
-          {/* Purse tracker */}
-          <div style={{ borderTop: `1px solid ${borderColor}` }} className="pt-4">
-            <p className="text-xs font-black uppercase tracking-widest mb-3" style={{ color: textSecondary }}>All Franchises — Live Purse</p>
-            <div className="grid grid-cols-2 sm:grid-cols-5 gap-2">
-              {allTeams.slice(0, 10).map(t => (
-                <div key={t.shortName} style={{ background: surfaceBg, border: `1px solid ${borderColor}` }} className="rounded-xl p-2.5 flex items-center justify-between text-xs">
-                  <span className="font-bold" style={{ color: textPrimary }}>{t.shortName}</span>
-                  <span className="font-mono font-black" style={{ color: "#10B981" }}>{formatCurrencyCr(t.purseRemaining)}</span>
-                </div>
-              ))}
-            </div>
-          </div>
-        </div>
+        )}
 
         {/* RTM overlay */}
         {rtmState?.isActive && (
